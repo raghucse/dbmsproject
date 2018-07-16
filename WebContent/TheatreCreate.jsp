@@ -15,10 +15,10 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Create a User</title>
+    <title>Create a Theater</title>
 </head>
 <body>
-<h1>Create User</h1>
+<h1>Create Theater</h1>
 <form action="theatrecreate" method="post">
     <p>
         <label for="theatreid">theatre id</label>
