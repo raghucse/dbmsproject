@@ -34,8 +34,8 @@
                 <th>LastName</th>
                 <th>Password</th>
                 <th>Phone</th>
-                <th>Delete BlogUser</th>
-                <th>Update BlogUser</th>
+                <th>Delete User</th>
+                <th>Update User</th>
             </tr>
                 <tr>
                     <td><c:out value="${user.getUserName()}" /></td>
