@@ -15,14 +15,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Delete a User</title>
+    <title>Delete a Theater</title>
 </head>
 <body>
-<h1>${messages.title}</h1>
-<form action="userdelete" method="post">
+<h1>Delete a Theater</h1>
+<form action="theatredelete" method="post">
     <p>
     <div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-        <label for="threatreid">UserName</label>
+        <label for="threatreid">Theater id</label>
         <input id="threatreid" name="threatreid" value="${fn:escapeXml(param.threatreid)}">
     </div>
     </p>

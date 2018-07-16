@@ -85,7 +85,6 @@ public class FindTheatre extends HttpServlet {
             messages.put("success", "Displaying results for " + location);
         }
         req.setAttribute("theatres", theatres);
-
         req.getRequestDispatcher("/FindTheatre.jsp").forward(req, resp);
     }
 }

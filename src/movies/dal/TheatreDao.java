@@ -30,7 +30,7 @@ public class TheatreDao {
      * This runs a INSERT statement.
      */
     public Theatre create(Theatre theatre) throws SQLException {
-        String insertTheatre = "INSERT INTO INSERT INTO Theatre(TheatreId,TheatreName,Location,TheatreType)" +
+        String insertTheatre = "INSERT INTO Theatre(TheatreId,TheatreName,Location,TheatreType)" +
                 " VALUES(?,?,?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;

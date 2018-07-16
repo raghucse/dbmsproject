@@ -18,44 +18,40 @@
     <title>Find a User</title>
 </head>
 <body>
-	<form action="findusers" method="post">
-		<h1>Search for a User by User Name</h1>
-		<p>
-			<label for="username">User Name</label>
-			<input id="username" name="username" value="${fn:escapeXml(param.username)}">
-		</p>
-		<p>
-			<input type="submit">
-			<br/><br/><br/>
-			<span id="successMessage"><b>${messages.success}</b></span>
-		</p>
-	</form>
-	<br/>
-	<div id="userCreate"><a href="usercreate">Create User</a></div>
-	<br/>
-	<h1>Matching Users</h1>
-        <table border="1">
-            <tr>
-                <th>UserName</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Password</th>
-                <th>Phone</th>
-                <th>Delete BlogUser</th>
-                <th>Update BlogUser</th>
-            </tr>
-
-                <tr>
-                    <td><c:out value="${users.getUserName()}" /></td>
-                    <td><c:out value="${users.getFirstName()}" /></td>
-                    <td><c:out value="${users.getLastName()}" /></td>
-                    <td><c:out value="${users.getPassword()}" /></td>
-                    <td><c:out value="${users.getPhone()}" /></td>
-                    <td><a href="userdelete?username=<c:out value="${users.getUserName()}"/>">Delete</a></td>
-                    <td><a href="userupdate?username=<c:out value="${users.getUserName()}"/>">Update</a></td>
-                </tr>
-           
-       </table>
+<form action="findtheatre" method="post">
+    <h1>Search for a theatre by location</h1>
+    <p>
+        <label for="location">Location</label>
+        <input id="location" name="location" value="${fn:escapeXml(param.location)}">
+    </p>
+    <p>
+        <input type="submit">
+        <br/><br/><br/>
+        <span id="successMessage"><b>${messages.success}</b></span>
+    </p>
+</form>
+<br/>
+<div id="theatreCreate"><a href="theatrecreate">Create Theatre</a></div>
+<br/>
+<h1>Matching Theatres</h1>
+<table border="1">
+    <tr>
+        <th>Theatre ID</th>
+        <th>Theatre Name</th>
+        <th>Theatre Location</th>
+        <th>Theatre Type</th>
+    </tr>
+    <c:forEach items="${theatres}" var="theatre" >
+        <tr>
+            <td><c:out value="${theatre.getTheatreid()}" /></td>
+            <td><c:out value="${theatre.getTheatrename()}" /></td>
+            <td><c:out value="${theatre.getLocation()}" /></td>
+            <td><c:out value="${theatre.getTheatreType()}" /></td>
+            <td><a href="theatredelete?theatreid=<c:out value="${theatre.getTheatreid()}"/>">Delete</a></td>
+            <td><a href="theatreupdate?theatreid=<c:out value="${theatre.getTheatreid()}"/>">Update</a></td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>
 

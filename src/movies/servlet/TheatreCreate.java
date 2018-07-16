@@ -59,7 +59,7 @@ public class TheatreCreate extends HttpServlet {
             String location = req.getParameter("location");
             try {
                 // Exercise: parse the input for StatusLevel.
-                Theatre theatre = new Theatre(Integer.parseInt(theatreid), theatrename, location, Theatre.TheatreType.STANDARD);
+                Theatre theatre = new Theatre(Integer.parseInt(theatreid), theatrename, location, Theatre.TheatreType.IMAX);
                 theatre = theatreDao.create(theatre);
                 messages.put("success", "Successfully created " + theatre);
             } catch (SQLException e) {

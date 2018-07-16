@@ -19,10 +19,10 @@
 </head>
 <body>
 <h1>Update Theatre</h1>
-<form action="userupdate" method="post">
+<form action="theatreupdate" method="post">
     <p>
         <label for="theatreid">theatre Id</label>
-        <input id="theatreid" name="theatreis" value="${fn:escapeXml(param.theatreid)}">
+        <input id="theatreid" name="theatreid" value="${fn:escapeXml(param.theatreid)}">
     </p>
     <p>
         <label for="location">New location</label>

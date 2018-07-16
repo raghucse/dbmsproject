@@ -41,12 +41,12 @@ public class TheatreUpdate extends HttpServlet {
         // Retrieve user and validate.
         String theatreid = req.getParameter("theatreid");
         if (theatreid == null || theatreid.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid UserName.");
+            messages.put("success", "Please enter a valid Theater id.");
         } else {
             try {
                 Theatre theatre = theatreDao.getTheatreById(Integer.parseInt(theatreid));
                 if(theatre == null) {
-                    messages.put("success", "UserName does not exist.");
+                    messages.put("success", "Theater does not exist.");
                 }
                 req.setAttribute("theatre", theatre);
             } catch (SQLException e) {

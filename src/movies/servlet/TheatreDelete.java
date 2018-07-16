@@ -36,7 +36,7 @@ public class TheatreDelete extends HttpServlet {
         req.setAttribute("messages", messages);
         // Provide a title and render the JSP.
         messages.put("title", "Delete User");
-        req.getRequestDispatcher("/TheateDelete.jsp").forward(req, resp);
+        req.getRequestDispatcher("/TheatreDelete.jsp").forward(req, resp);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class TheatreDelete extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve and validate name.
-        String theatreid = req.getParameter("theatreid");
+        String theatreid = req.getParameter("threatreid");
         if (theatreid == null || theatreid.trim().isEmpty()) {
             messages.put("title", "Invalid UserName");
             messages.put("disableSubmit", "true");

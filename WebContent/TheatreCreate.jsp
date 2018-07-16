@@ -19,7 +19,7 @@
 </head>
 <body>
 <h1>Create User</h1>
-<form action="usercreate" method="post">
+<form action="theatrecreate" method="post">
     <p>
         <label for="theatreid">theatre id</label>
         <input id="theatreid" name="theatreid" value="">
