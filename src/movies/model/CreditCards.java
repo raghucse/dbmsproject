@@ -18,6 +18,9 @@ public class CreditCards {
         this.cardnumber = cardnumber;
         this.date = date;
     }
+    public CreditCards(long cardnumber) {
+        this.cardnumber = cardnumber;
+    }
 
     public long getCardnumber() {
         return cardnumber;

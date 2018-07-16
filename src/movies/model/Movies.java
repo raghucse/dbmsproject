@@ -22,6 +22,10 @@ public class Movies {
         this.runtime = runtime;
     }
 
+    public Movies(int moviesId) {
+        this.moviesId=moviesId;
+    }
+
     public int getMoviesId() {
         return moviesId;
     }
