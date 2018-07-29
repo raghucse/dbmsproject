@@ -15,7 +15,7 @@
 <form action="updatecreditcard" method="post">
     <p>
         <label for="creditcardnumber">Creditcardnumber</label>
-        <input id="creditcardnumber" name="creditcardnumber" value="${fn:escapeXml(param.movieid)}">
+        <input id="creditcardnumber" name="creditcardnumber" value="${fn:escapeXml(param.creditcardnumber)}">
     </p>
     <p>
         <label for="expiration">New Overview</label>

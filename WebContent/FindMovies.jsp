@@ -31,7 +31,7 @@
     </p>
 </form>
 <br/>
-<div id="createmovies"><a href="createmovies">Create Theatre</a></div>
+<div id="createmovies"><a href="createmovies">Create Movie</a></div>
 <br/>
 <h1>Matching Movies</h1>
 
@@ -46,6 +46,8 @@
         <th>Genre</th>
         <th>Runtime</th>
         <th>Delete Movie</th>
+        <th>Update Movie</th>
+
     </tr>
     <c:forEach items="${movies}" var="movies" >
         <tr>
@@ -58,6 +60,7 @@
             <td><c:out value="${movies.getGenre()}" /></td>
             <td><c:out value="${movies.getRuntime()}" /></td>
             <td><a href="deletemovies?movieid=<c:out value="${movies.getMoviesId()}"/>">Delete</a></td>
+            <td><a href="updatemovie?movieid=<c:out value="${movies.getMoviesId()}"/>">Update</a></td>
         </tr>
     </c:forEach>
 </table>
