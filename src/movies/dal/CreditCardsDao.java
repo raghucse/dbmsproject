@@ -9,9 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 
 /**
@@ -71,7 +71,7 @@ public class CreditCardsDao {
             connection = connectionManager.getConnection();
             updateStmt = connection.prepareStatement(updateCard);
 
-            updateStmt.setDate(1, newExpiration);
+            updateStmt.setDate(1, (java.sql.Date) newExpiration);
             updateStmt.setLong(2, creditCard.getCardnumber());
             updateStmt.executeUpdate();
 
