@@ -24,7 +24,7 @@
 		</p>
 	</form>
 	<br/>
-	<div id="userCreate"><a href="movieusercreate">Create User</a></div>
+	<div id="userCreate"><a href="/movieusercreate">Create User</a></div>
 	<br/>
 	<h1>Matching Users</h1>
         <table border="1">

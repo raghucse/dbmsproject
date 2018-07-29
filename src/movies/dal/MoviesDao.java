@@ -1,6 +1,7 @@
 package movies.dal;
 
 import movies.model.Movies;
+import movies.model.Users;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -170,7 +171,7 @@ public class MoviesDao {
         return movies1;
     }
 
-    public List<Movies> getMoviesByLanguage(Movies movies) throws SQLException {
+    public List<Movies> getMoviesByLanguage(String language) throws SQLException {
         List<Movies> movies1 = new ArrayList<Movies>();
         String selectmovies = "SELECT * FROM Movie WHERE Language=?;";
         Connection connection = null;
@@ -179,7 +180,7 @@ public class MoviesDao {
         try {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectmovies);
-            selectStmt.setString(1, movies.getLanguage());
+            selectStmt.setString(1, language);
             results = selectStmt.executeQuery();
             while (results.next()) {
                 int movieid= results.getInt("MovieId");
@@ -187,10 +188,10 @@ public class MoviesDao {
                 String overview = results.getString("Overview");
                 String releasedate = results.getString("ReleaseDate");
                 String country = results.getString("Country");
-                String language = results.getString("Language");
+                String language2 = results.getString("Language");
                 String genre = results.getString("Genre");
                 int runtime = results.getInt("Runtime");
-                Movies movie = new Movies(movieid,name,overview,releasedate,country,language,genre,runtime);
+                Movies movie = new Movies(movieid,name,overview,releasedate,country,language2,genre,runtime);
                 movies1.add(movie);
             }
         } catch (SQLException e) {
@@ -208,5 +209,31 @@ public class MoviesDao {
             }
         }
         return movies1;
+    }
+    public Movies updateOverview(Movies movie, String overview) throws SQLException {
+        String updateMovie = "UPDATE Movie SET Overview=? WHERE MovieId=?;";
+        Connection connection = null;
+        PreparedStatement updateStmt = null;
+        try {
+            connection = connectionManager.getConnection();
+            updateStmt = connection.prepareStatement(updateMovie);
+            updateStmt.setString(1, overview);
+            updateStmt.setInt(2, movie.getMoviesId());
+            updateStmt.executeUpdate();
+
+            // Update the person param before returning to the caller.
+            movie.setOverview(overview);
+            return movie;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (updateStmt != null) {
+                updateStmt.close();
+            }
+        }
     }
 }
