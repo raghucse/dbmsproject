@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="dbmsproject:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/dbmsproject_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="dbmsproject/web/Web" />
+    </root>
+  </artifact>
+</component>
