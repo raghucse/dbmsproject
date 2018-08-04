@@ -40,6 +40,7 @@
         <th>Card Expiration</th>
         <th>User Name</th>
         <th>Delete Card</th>
+        <th>Update Card</th>
     </tr>
     <c:forEach items="${creditcard}" var="creditcard" >
         <tr>
@@ -47,6 +48,7 @@
             <td><c:out value="${creditcard.getDate()}" /></td>
             <td><c:out value="${creditcard.getUsers()}" /></td>
             <td><a href="deletecreditcard?cardnumber=<c:out value="${creditcard.getCardnumber()}"/>">Delete</a></td>
+            <td><a href="updatecreditcard?cardnumber=<c:out value="${creditcard.getCardnumber()}"/>">Update</a></td>
         </tr>
     </c:forEach>
 </table>

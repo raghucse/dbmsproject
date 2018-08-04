@@ -1,5 +1,4 @@
 package movies.tools;
-
 import movies.dal.UsersDao;
 import movies.dal.*;
 import movies.model.*;

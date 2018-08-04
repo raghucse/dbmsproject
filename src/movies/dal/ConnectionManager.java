@@ -14,7 +14,7 @@ import javax.servlet.ServletException;
 public class ConnectionManager {
 
     // User to connect to your database instance. By default, this is "root2".
-    private final String user = "root";
+    private final String user = "nikitha";
     // Password for the user.
     private final String password = "password";
     // URI to your database server. If running on the same machine, then this is "localhost".
@@ -22,7 +22,7 @@ public class ConnectionManager {
     // Port to your database server. By default, this is 3307.
     private final int port = 3306;
     // Name of the MySQL schema that contains your tables.
-    private final String schema = "MovieApplication2";
+    private final String schema = "MovieApplication";
 
     /**
      * Get the connection to the database instance.

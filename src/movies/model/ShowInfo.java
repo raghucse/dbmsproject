@@ -17,6 +17,10 @@ public class ShowInfo {
         this.showtime = showtime;
     }
 
+    public ShowInfo(int showinfoid) {
+        this.showinfoid = showinfoid;
+    }
+
     public int getShowinfoid() {
         return showinfoid;
     }
