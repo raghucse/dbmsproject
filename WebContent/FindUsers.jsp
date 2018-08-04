@@ -21,16 +21,25 @@
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0-rc.2/dist/js/foundation.min.js" integrity="sha256-G6jsRyH1fxbsvFIXSCuwYmI1aIDYBa28xscrvmYjJy0= sha384-vtoG68NvPc9azmFJr447vvY8qgdyA4FdaJ5/bqvzIM4eAdZfO0iyRRF8l2AAscYI sha512-43seCcNrHA0BQgrtyajB9sp8yOdv5c8QdYvgjP7zJ7v+dmzAcxYDQ2gupb9aztsNWBq1COIp/3NHYkQs4l/dkg==" crossorigin="anonymous"></script>
 </head>
 <body >
+
+<div class="row-expanded top-bar" style="background: black;margin-bottom: 30px;" >
+    <div class="top-bar-left">
+        <ul class="dropdown menu" style="background: black"  data-dropdown-menu>
+            <li class="menu-text" style="color:white;font-size: 18px;">MovieTalk</li>
+        </ul>
+    </div>
+    <div class="top-bar-right">
+    </div>
+</div>
 	<form action="findmovieusers" method="post">
-		<h1>Search for a User by UserName</h1>
+        <h4 style="text-align: center">Here are the list of Users available</h4>
+        <h6>Filter By Username by adding it into the input box</h6>
 		<p>
 			<label for="username">UserName</label>
 			<input id="username" name="username" value="${fn:escapeXml(param.username)}">
 		</p>
 		<p>
 			<input type="submit">
-			<br/><br/><br/>
-			<span id="successMessage"><b>${messages.success}</b></span>
 		</p>
 	</form>
 	<br/>
@@ -47,15 +56,18 @@
                 <th>Delete User</th>
                 <th>Update User</th>
             </tr>
-                <tr>
-                    <td><c:out value="${user.getUserName()}" /></td>
-                    <td><c:out value="${user.getFirstName()}" /></td>
-                    <td><c:out value="${user.getLastName()}" /></td>
-                    <td><c:out value="${user.getPassword()}" /></td>
-                    <td><c:out value="${user.getPhone()}" /></td>
-                    <td><a href="userdelete?username=<c:out value="${user.getUserName()}"/>">Delete</a></td>
-                    <td><a href="movieuserupdate?username=<c:out value="${user.getUserName()}"/>">Update</a></td>
-                </tr>
+        <c:forEach items="${users}" var="users" >
+            <tr>
+                <td><c:out value="${users.getUserName()}" /></td>
+                <td><c:out value="${users.getFirstName()}" /></td>
+                <td><c:out value="${users.getLastName()}" /></td>
+                <td><c:out value="${users.getPassword()}" /></td>
+                <td><c:out value="${users.getPhone()}" /></td>
+                <td><a href="userdelete?username=<c:out value="${users.getUserName()}"/>">Delete</a></td>
+                <td><a href="movieuserupdate?username=<c:out value="${users.getUserName()}"/>">Update</a></td>
+            </tr>
+        </c:forEach>
+
        </table>
 </body>
 </html>

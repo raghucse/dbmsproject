@@ -34,27 +34,20 @@ public class FindMovies extends HttpServlet {
         // Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-
         //List<Users> users = new ArrayList<Users>();
         List<Movies> movies = new ArrayList<Movies>();
-
-        String language = req.getParameter("language");
-        if (language == null || language.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid name.");
-        } else {
-            // Retrieve BlogUsers, and store as a message.
             try {
-                movies = moviesDao.getMoviesByLanguage(language);
+                movies = moviesDao.getAllMovies();
+                System.out.println(movies);
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw new IOException(e);
             }
-            messages.put("success", "Displaying results for " + language);
-            // Save the previous search term, so it can be used as the default
-            // in the input box when rendering FindUsers.jsp.
-            messages.put("previousFirstName", language);
-        }
-        req.setAttribute("movies", language);
+//            messages.put("success", "Displaying results for " + );
+//            // Save the previous search term, so it can be used as the default
+//            // in the input box when rendering FindUsers.jsp.
+          //  messages.put("previousFirstName", language);
+        req.setAttribute("movies", movies);
 
         req.getRequestDispatcher("/FindMovies.jsp").forward(req, resp);
     }

@@ -4,11 +4,7 @@ import movies.dal.*;
 import movies.model.*;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.annotation.*;
 import javax.servlet.ServletException;
@@ -50,27 +46,18 @@ public class FindUsers extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
-        //List<Users> users = new ArrayList<Users>();
-        Users users = null;
-        // Retrieve and validate name.
-        // firstname is retrieved from the URL query string.
-        String username = req.getParameter("username");
-        if (username == null || username.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid name.");
-        } else {
-        	// Retrieve BlogUsers, and store as a message.
+        List<Users> users = new ArrayList<Users>();
         	try {
-            	users = usersDao.getUserFromUserName(username);
+            	users = usersDao.getAllUsers();
+            	System.out.println("all users");
+
             } catch (SQLException e) {
     			e.printStackTrace();
     			throw new IOException(e);
             }
-        	messages.put("success", "Displaying results for " + username);
-        	// Save the previous search term, so it can be used as the default
-        	// in the input box when rendering FindUsers.jsp.
-        	messages.put("previousFirstName", username);
-        }
-        req.setAttribute("Users", users);
+//        	messages.put("success", "Displaying results for " + username);
+//        	messages.put("previousFirstName", username);
+        req.setAttribute("users", users);
         req.getRequestDispatcher("/FindUsers.jsp").forward(req, resp);
 	}
 
@@ -99,7 +86,7 @@ public class FindUsers extends HttpServlet {
             }
         	messages.put("success", "Displaying results for " + userName);
         }
-        req.setAttribute("user", users);
+        req.setAttribute("users", users);
         req.getRequestDispatcher("/FindUsers.jsp").forward(req, resp);
     }
 }

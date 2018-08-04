@@ -237,4 +237,41 @@ public class RecommendationsDao {
         return recommendations;
     }
 
+    public List<Recommendations> getAllRecommendations() throws SQLException {
+        List<Recommendations> recommendations = new ArrayList<Recommendations>();
+        String selectrecommendations = "SELECT * FROM Recommendations";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        UsersDao usersDao = UsersDao.getInstance();
+        MoviesDao moviesDao = MoviesDao.getInstance();
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectrecommendations);
+            results = selectStmt.executeQuery();
+            while (results.next()) {
+                int recommendationid = results.getInt("RecommendationId");
+                String username = results.getString("UserName");
+                int movieid = results.getInt("RestaurantId");
+                Users user = usersDao.getUserFromUserName(username);
+                Movies movies = moviesDao.getMovieById(movieid);
+                Recommendations recommendation = new Recommendations(recommendationid, user, movies);
+                recommendations.add(recommendation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return recommendations;
+    }
 }
