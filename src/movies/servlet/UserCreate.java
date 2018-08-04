@@ -71,6 +71,6 @@ public class UserCreate extends HttpServlet {
 	        }
         }
 
-        req.getRequestDispatcher("/UserCreate.jsp").forward(req, resp);
+        req.getRequestDispatcher("/Register.jsp").forward(req, resp);
     }
 }

@@ -7,44 +7,49 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Create a User</title>
+  <link rel="stylesheet" href="CSS/register.css">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 </head>
-<body>
-<h1>Create User</h1>
-<form action="movieusercreate" method="post">
-    <p>
-        <label for="username">UserName</label>
-        <input id="username" name="username" value="">
-    </p>
-    <p>
-        <label for="firstname">FirstName</label>
-        <input id="firstname" name="firstname" value="">
-    </p>
-    <p>
-        <label for="lastname">LastName</label>
-        <input id="lastname" name="lastname" value="">
-    </p>
-    <p>
-        <label for="password">Password</label>
-        <input id="password" name="password" value="">
-    </p>
-    <p>
-        <label for="email">Email</label>
-        <input id="email" name="email" value="">
-    </p>
-    <p>
-        <label for="phone">Phone</label>
-        <input id="phone" name="phone" value="">
-    </p>
-
-    <p>
-        <input type="submit">
-    </p>
-</form>
-
+<body id="LoginForm">
+<div class="container">
+  <div class="login-form">
+    <div class="main-div">
+      <div class="panel">
+        <h2>User Registration</h2>
+        <p>Enter your details</p>
+      </div>
+      <form id="Login" action="movieusercreate" method="post">
+        <div class="form-group">
+          <input type="text" class="form-control" id="username" name="username" placeholder="UserName" value="">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First name" value="">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last name" value="">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="email" name="email" placeholder="email" value="">
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" id="phone" name="phone" placeholder="phone" value="">
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
     <span id="successMessage"><b>${messages.success}</b></span>
+     <div class="forgot">
+          <a href="Login.jsp">Login</a>
+     </div>
+    </div>
 
-    <div id="Login"><a href="Login.jsp">Login</a></div>
+  </div>
+</div>
+</div>
 </body>
 </html>
