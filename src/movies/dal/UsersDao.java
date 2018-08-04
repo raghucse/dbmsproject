@@ -122,6 +122,45 @@ public class UsersDao {
         }
     }
 
+    public Users getUserFromUserNameAndPassword(String userName, String pass) throws SQLException{
+        String selectUser = "SELECT UserName,Password,FirstName,LastName,Email,PhoneNumber FROM User WHERE UserName=? and Password=?;";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectUser);
+            selectStmt.setString(1, userName);
+            selectStmt.setString(2, pass);
+            results = selectStmt.executeQuery();
+            if (results.next()) {
+                String resultUserName = results.getString("UserName");
+                String firstName = results.getString("FirstName");
+                String lastName = results.getString("LastName");
+                String password = results.getString("Password");
+                String email = results.getString("Email");
+                String phone = results.getString("PhoneNumber");
+                Users user = new Users(resultUserName, firstName, lastName, password, email, phone);
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return null;
+    }
+    
+
     public Users getUserFromUserName(String userName) throws SQLException {
         String selectUser = "SELECT UserName,Password,FirstName,LastName,Email,PhoneNumber FROM User WHERE UserName=?;";
         Connection connection = null;
