@@ -29,6 +29,11 @@
             crossorigin="anonymous"></script>
 
 </head>
+<div class="topnav">
+    <a class="active" href="DashBoard.jsp">Home</a>
+    <a href="logoutUser" class="pull-right">Logout</a>
+    <a href="profile" class="pull-right">Profile</a>
+</div>
 <body>
 <div class="row-expanded top-bar" style="background: black;margin-bottom: 30px;">
     <div class="top-bar-left">
