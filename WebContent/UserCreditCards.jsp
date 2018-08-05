@@ -9,23 +9,17 @@
 <head>
     <link rel="stylesheet" href="CSS/login.css">
     <link rel="stylesheet" href="CSS/navbar.css">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <style>
-        body{
-            max-width: 1400px;
-            margin: auto !important;
-        }
-        .top-bar-right a:hover{
-            text-decoration: underline;
-        }
-    </style>
-    <!-- foundation-float.min.css: Compressed CSS with legacy Float Grid -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0-rc.2/dist/css/foundation-float.min.css" integrity="sha256-SXzNzz68b8cy/1oRvdP128/5VlvegrZO5QDmBiqhlQc= sha384-5EVTk1nWllg1T/XoVEd82fhnOxUhRUOquz4AyO3+M0kbhUzhruouReQWPnihRxPs sha512-y0IHToRgzE99SfoteKLXR0MUOTRPMQHwc4nmU2/Uqhu4KulOzK18RbuicuhlgzPDdj23skwxTWUv7CJs+psXig==" crossorigin="anonymous">
-    <!-- Compressed JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0-rc.2/dist/js/foundation.min.js" integrity="sha256-G6jsRyH1fxbsvFIXSCuwYmI1aIDYBa28xscrvmYjJy0= sha384-vtoG68NvPc9azmFJr447vvY8qgdyA4FdaJ5/bqvzIM4eAdZfO0iyRRF8l2AAscYI sha512-43seCcNrHA0BQgrtyajB9sp8yOdv5c8QdYvgjP7zJ7v+dmzAcxYDQ2gupb9aztsNWBq1COIp/3NHYkQs4l/dkg==" crossorigin="anonymous"></script>
+
 </head>
+<div class="topnav">
+    <a class="active" href="DashBoard.jsp">Home</a>
+    <a href="logoutUser" class="pull-right">Logout</a>
+    <a href="profile" class="pull-right">Profile</a>
+</div>
 <body id="LoginForm">
 <div class="container">
     <div class="login-form">
@@ -52,17 +46,11 @@
         <tr>
             <th>CardNumber</th>
             <th>Card Expiration</th>
-            <th>User Name</th>
-            <th>Delete Card</th>
-            <th>Update Card</th>
         </tr>
         <c:forEach items="${creditcard}" var="creditcard" >
             <tr>
                 <td><c:out value="${creditcard.getCardnumber()}" /></td>
                 <td><c:out value="${creditcard.getDate()}" /></td>
-                <td><c:out value="${creditcard.getUsers().getUserName()}" /></td>
-                <td><a href="deletecreditcard?cardnumber=<c:out value="${creditcard.getCardnumber()}"/>">Delete</a></td>
-                <td><a href="updatecreditcard?cardnumber=<c:out value="${creditcard.getCardnumber()}"/>">Update</a></td>
             </tr>
         </c:forEach>
     </table>
