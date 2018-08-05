@@ -1,4 +1,4 @@
-<%--
+ <%--
   Created by IntelliJ IDEA.
   User: nikithanagaraj
   Date: 7/15/18
@@ -71,8 +71,8 @@
 <table border="1">
     <tr>
         <th>Recommendation ID</th>
-        <th>Movie ID </th>
         <th>UserName</th>
+        <th>Movie ID </th>
         <th>Delete Recommendation</th>
         <th>Update Recommendation</th>
 

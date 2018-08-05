@@ -113,7 +113,8 @@ public class MoviesDao {
                 String language = results.getString("Language");
                 String genre = results.getString("Genre");
                 int runtime = results.getInt("Runtime");
-                Movies movies = new Movies(movieid,name,overview,releasedate,country,language,genre,runtime);
+                float avg_rating = results.getFloat("AverageRating");
+                Movies movies = new Movies(movieid,name,overview,releasedate,country,language,genre,runtime, avg_rating);
                 return movies;
             }
         } catch (SQLException e) {
@@ -154,7 +155,9 @@ public class MoviesDao {
                 String language = results.getString("Language");
                 String genre = results.getString("Genre");
                 int runtime = results.getInt("Runtime");
-                Movies movie = new Movies(movieid,name,overview,releasedate,country,language,genre,runtime);
+
+                float avg_rating = results.getFloat("AverageRating");
+                Movies movie = new Movies(movieid,name,overview,releasedate,country,language,genre,runtime, avg_rating);
                 movies1.add(movie);
             }
         } catch (SQLException e) {
@@ -194,7 +197,8 @@ public class MoviesDao {
                 String language2 = results.getString("Language");
                 String genre = results.getString("Genre");
                 int runtime = results.getInt("Runtime");
-                Movies movie = new Movies(movieid,name,overview,releasedate,country,language2,genre,runtime);
+                float avg_rating = results.getFloat("AverageRating");
+                Movies movie = new Movies(movieid,name,overview,releasedate,country,language,genre,runtime, avg_rating);
                 movies1.add(movie);
             }
         } catch (SQLException e) {
@@ -258,7 +262,8 @@ public class MoviesDao {
                 String language2 = results.getString("Language");
                 String genre = results.getString("Genre");
                 int runtime = results.getInt("Runtime");
-                Movies movie1 = new Movies(movieid,name,overview,releasedate,country,language2,genre,runtime);
+                float avg_rating = results.getFloat("AverageRating");
+                Movies movie1 = new Movies(movieid,name,overview,releasedate,country,language2,genre,runtime, avg_rating);
                 movies.add(movie1);
             }
         } catch (SQLException e) {

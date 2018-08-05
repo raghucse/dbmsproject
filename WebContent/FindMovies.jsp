@@ -78,6 +78,7 @@
         <th>Language</th>
         <th>Genre</th>
         <th>Runtime</th>
+        <th>Average rating</th>
         <th>Delete Movie</th>
         <th>Update Movie</th>
 
@@ -92,6 +93,7 @@
             <td><c:out value="${movies.getLanguage()}" /></td>
             <td><c:out value="${movies.getGenre()}" /></td>
             <td><c:out value="${movies.getRuntime()}" /></td>
+            <td><c:out value="${movies.getAvg_rating()}" /></td>
             <td><a href="deletemovies?movieid=<c:out value="${movies.getMoviesId()}"/>">Delete</a></td>
             <td><a href="updatemovie?movieid=<c:out value="${movies.getMoviesId()}"/>">Update</a></td>
         </tr>
