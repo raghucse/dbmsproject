@@ -43,7 +43,7 @@ public class LoginUser extends HttpServlet {
 			Cookie user = new Cookie("user",
 					username);
 			resp.addCookie(user);
-			resp.sendRedirect("AdminDashBoard.jsp");
+			resp.sendRedirect("/findmovieusers");
 		}else {
         	try {
             	users = usersDao.getUserFromUserNameAndPassword(username, password);

@@ -75,7 +75,6 @@
         <th>Theatre Type</th>
         <th>Delete Theatre</th>
         <th>Update Theatre</th>
-        <th>ShowInfo</th>
     </tr>
     <c:forEach items="${theatres}" var="theatre" >
         <tr>
