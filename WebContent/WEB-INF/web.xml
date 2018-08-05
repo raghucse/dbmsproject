@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-  <display-name>dbmsproject</display-name>
-  <welcome-file-list>
-    <welcome-file>FindUsers.jsp</welcome-file>
-  </welcome-file-list>
-  <!--
-  <servlet>
-    <servlet-name>FindUsers</servlet-name>
-    <servlet-class>blog.servlet.FindUsers</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>movies.servlet.FindUsers</servlet-name>
-    <url-pattern>/findmovieusers</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>movies.servlet.UserCreate</servlet-name>
-    <url-pattern>/movieusercreate</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>movies.servlet.FindTheater</servlet-name>
-    <url-pattern>/findtheatre</url-pattern>
-  </servlet-mapping>
-  -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>dbmsproject</display-name>
+    <welcome-file-list>
+        <welcome-file>FindUsers.jsp</welcome-file>
+    </welcome-file-list>
+    <!--
+    <servlet>
+      <servlet-name>FindUsers</servlet-name>
+      <servlet-class>blog.servlet.FindUsers</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>movies.servlet.FindUsers</servlet-name>
+      <url-pattern>/findmovieusers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>movies.servlet.UserCreate</servlet-name>
+      <url-pattern>/movieusercreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+      <servlet-name>movies.servlet.FindTheater</servlet-name>
+      <url-pattern>/findtheatre</url-pattern>
+    </servlet-mapping>
+    -->
 </web-app>

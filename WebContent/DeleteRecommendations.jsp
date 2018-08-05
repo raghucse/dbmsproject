@@ -15,7 +15,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Delete a Showinfo</title>
+    <title>Delete a Recommendation</title>
     <style>
         body{
             max-width: 1400px;
@@ -30,6 +30,7 @@
     <!-- Compressed JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0-rc.2/dist/js/foundation.min.js" integrity="sha256-G6jsRyH1fxbsvFIXSCuwYmI1aIDYBa28xscrvmYjJy0= sha384-vtoG68NvPc9azmFJr447vvY8qgdyA4FdaJ5/bqvzIM4eAdZfO0iyRRF8l2AAscYI sha512-43seCcNrHA0BQgrtyajB9sp8yOdv5c8QdYvgjP7zJ7v+dmzAcxYDQ2gupb9aztsNWBq1COIp/3NHYkQs4l/dkg==" crossorigin="anonymous"></script>
 
+</head>
 <body>
 <div class="row-expanded top-bar" style="background: black;margin-bottom: 30px;" >
     <div class="top-bar-left">
@@ -49,13 +50,13 @@
 
     </div>
 </div>
-<a href="findshowinfo" class="button">Back</a>
+<a href="findrecommendations" class="button">Back</a>
 <h1>${messages.title}</h1>
-<form action="deleteshowinfo" method="post">
+<form action="deleterecommendations" method="post">
     <p>
     <div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-        <label for="showinfoid">Showinfo id</label>
-        <input id="showinfoid" name="showinfoid" value="${fn:escapeXml(param.showinfoid)}">
+        <label for="recommendationid">Recommendationid</label>
+        <input id="recommendationid" name="recommendationid" value="${fn:escapeXml(param.recommendationid)}">
     </div>
     </p>
     <p>
