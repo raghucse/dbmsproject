@@ -34,6 +34,10 @@ public class UserRecommendedMovies extends HttpServlet{
         Map<String, String> messages = new HashMap<String, String>();
 //        req.setAttribute("messages", messages);
         String username = req.getParameter("username");
+        if(username == null){
+            username = Helper.getUsernameFromCookie(req);
+        }
+
 
         List<Recommendations> recommendations = new ArrayList<Recommendations>();
         List<Movies> moviesForGenreFiltered = new ArrayList<>();

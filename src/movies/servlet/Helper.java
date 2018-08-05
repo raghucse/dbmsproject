@@ -1,5 +1,7 @@
 package movies.servlet;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -17,6 +19,20 @@ public class Helper {
         }
 
         return result;
+    }
+
+    public static String getUsernameFromCookie(HttpServletRequest req){
+        Cookie[] cookies = req.getCookies();
+        String user = null;
+        String searchUser = null;
+        for (int i = 0; i < cookies.length; i++) {
+            String name = cookies[i].getName();
+            if(name.equals("user")){
+                user = cookies[i].getValue();
+            }
+        }
+        return user;
+
     }
 
 }
