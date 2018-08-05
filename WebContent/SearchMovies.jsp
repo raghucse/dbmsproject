@@ -57,7 +57,7 @@
     </div>
 </div>
 <h4 style="text-align: center">Search result for movies</h4>
-<div id="dashboardsearch"><a  class="button" href="dashboardsearch">Back</a></div>
+<div id="dashboardsearch"><a  class="button" href="DashBoard.jsp">Back</a></div>
 <br/>
 <table border="1">
     <tr>
