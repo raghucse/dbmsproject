@@ -13,6 +13,7 @@ import java.util.Map;
 
 import javax.servlet.annotation.*;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,12 +32,7 @@ public class UserDelete extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// Map for storing messages.
-        Map<String, String> messages = new HashMap<String, String>();
-        req.setAttribute("messages", messages);
-        // Provide a title and render the JSP.
-        messages.put("title", "Delete User");
-        req.getRequestDispatcher("/UserDelete.jsp").forward(req, resp);
+		doPost(req, resp);
 	}
 
 	@Override
@@ -45,16 +41,24 @@ public class UserDelete extends HttpServlet {
         // Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
+		Cookie[] cookies = req.getCookies();
+		String userName = null;
 
         // Retrieve and validate name.
-        String userName = req.getParameter("username");
+		for (int i = 0; i < cookies.length; i++) {
+			String name = cookies[i].getName();
+			if(name.equals("user")){
+				userName = cookies[i].getValue();
+			}
+		}
         if (userName == null || userName.trim().isEmpty()) {
             messages.put("title", "Invalid UserName");
             messages.put("disableSubmit", "true");
         } else {
         	// Delete the BlogUser.
-	        Users users = new Users(userName);
+
 	        try {
+				Users users = usersDao.getUserFromUserName(userName);
 	        	users = usersDao.delete(users);
 	        	// Update the message.
 		        if (users == null) {
@@ -70,6 +74,6 @@ public class UserDelete extends HttpServlet {
 	        }
         }
 
-        req.getRequestDispatcher("/UserDelete.jsp").forward(req, resp);
+        resp.sendRedirect("logoutUser");
     }
 }
