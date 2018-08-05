@@ -61,7 +61,7 @@
 <br/>
 <table border="1">
     <tr>
-        <th>Movie ID</th>
+        <%--<th>Movie ID</th>--%>
         <th>Movie Name</th>
         <th>Movie Overview</th>
         <th>Movie ReleaseDate</th>
@@ -74,18 +74,39 @@
     </tr>
     <c:forEach items="${movies}" var="movies" >
         <tr>
-            <td><c:out value="${movies.getMoviesId()}" /></td>
-            <td><c:out value="${movies.getMoviename()}" /></td>
-            <td><c:out value="${movies.getOverview()}" /></td>
-            <td><c:out value="${movies.getReleasedate()}" /></td>
-            <td><c:out value="${movies.getCountry()}" /></td>
-            <td><c:out value="${movies.getLanguage()}" /></td>
-            <td><c:out value="${movies.getGenre()}" /></td>
-            <td><c:out value="${movies.getRuntime()}" /></td>
-            <td><c:out value="${movies.getAvg_rating()}" /></td>
+            <%--<form action="${pageContext.request.contextPath}/allmoviesuser" method="post">--%>
+                <%--<td><c:out value="${movies.getMoviesId()}" /></td>--%>
+                <td><c:out value="${movies.getMoviename()}" /></td>
+                <td><c:out value="${movies.getOverview()}" /></td>
+                <td><c:out value="${movies.getReleasedate()}" /></td>
+                <td><c:out value="${movies.getCountry()}" /></td>
+                <td><c:out value="${movies.getLanguage()}" /></td>
+                <td><c:out value="${movies.getGenre()}" /></td>
+                <td><c:out value="${movies.getRuntime()}" /></td>
+                <td><c:out value="${movies.getAvg_rating()}" /></td>
+                <td>
+                    <a href="allmoviesuser?movieid=<c:out value="${movies.getMoviesId()}"/>">Recommend</a>
+                        <%--<input type="submit" name="button2" value="Button 2" />--%>
+                        <%--<input type="submit" name="button3" value="Button 3" />--%>
+
+                    <%--<input type="checkbox" name="checkfield" id="g01-01" value="${movies.isRecommended()}"  onchange="doalert(this)"/>--%>
+                </td>
+                <td>
+                    Review
+                        <%--<input type="submit" name="button2" value="Button 2" />--%>
+                        <%--<input type="submit" name="button3" value="Button 3" />--%>
+
+                        <%--<input type="checkbox" name="checkfield" id="g01-01" value="${movies.isRecommended()}"  onchange="doalert(this)"/>--%>
+                </td>
+            <%--</form>--%>
+
+
         </tr>
     </c:forEach>
 </table>
+<p>
+    <span id="successMessage"><b>${messages.success}</b></span>
+</p>
 </body>
 </html>
 
