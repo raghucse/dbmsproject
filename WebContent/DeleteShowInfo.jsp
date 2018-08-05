@@ -46,7 +46,7 @@
             <li  style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findrecommendations">Recommendations</a> </li>
             <li style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findshowinfo">ShowTimes</a> </li>
             <li style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findreviews">Reviews</a> </li>
-
+            <li style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="loginUser">Logout</a> </li>
         </ul>
 
     </div>
