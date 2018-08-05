@@ -228,4 +228,41 @@ public class TheatreDao {
         }
         return theatres;
     }
+
+    public List<Theatre> getAllTheatres() throws SQLException {
+        List<Theatre> theatres = new ArrayList<Theatre>();
+        String selecttheatre = "SELECT * FROM Theatre";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        UsersDao usersDao = UsersDao.getInstance();
+        MoviesDao moviesDao = MoviesDao.getInstance();
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selecttheatre);
+            results = selectStmt.executeQuery();
+            while (results.next()) {
+                int theatreid = results.getInt("TheatreId");
+                String name = results.getString("TheatreName");
+                String location1 = results.getString("Location");
+                Theatre.TheatreType theatreType = Theatre.TheatreType.valueOf(results.getString("TheatreType"));
+                Theatre theatre = new Theatre(theatreid, name, location1, theatreType);
+                theatres.add(theatre);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return theatres;
+    }
 }

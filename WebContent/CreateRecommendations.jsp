@@ -15,7 +15,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Delete a Theater</title>
+    <title>Create a Recommendation</title>
     <style>
         body{
             max-width: 1400px;
@@ -50,22 +50,28 @@
 
     </div>
 </div>
-<a href="findtheatre" class="button">Back</a>
-<h1>Delete a Theater</h1>
-<form action="theatredelete" method="post">
+<a href="findrecommendations" class="button">Back</a>
+<h1>Create Recommendation</h1>
+<form action="createrecommendations" method="post">
     <p>
-    <div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-        <label for="threatreid">Theater id</label>
-        <input id="threatreid" name="threatreid" value="${fn:escapeXml(param.threatreid)}">
-    </div>
+        <label for="recommendationid">Recommendation id</label>
+        <input id="recommendationid" name="recommendationid" value="">
     </p>
     <p>
-			<span id="submitButton" <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-			<input type="submit">
-			</span>
+        <label for="username">User Name</label>
+        <input id="username" name="username" value="">
+    </p>
+    <p>
+        <label for="movieid">Movie id</label>
+        <input id="movieid" name="movieid" value="">
+    </p>
+    <p>
+        <input type="submit">
     </p>
 </form>
 <br/><br/>
-
+<p>
+    <span id="successMessage"><b>${messages.success}</b></span>
+</p>
 </body>
 </html>

@@ -2,9 +2,13 @@ package movies.servlet;
 
 
 import movies.dal.MoviesDao;
+import movies.dal.RecommendationsDao;
 import movies.dal.TheatreDao;
+import movies.dal.UsersDao;
 import movies.model.Movies;
+import movies.model.Recommendations;
 import movies.model.Theatre;
+import movies.model.Users;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -24,14 +28,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/createmovies")
-public class CreateMovies extends HttpServlet {
+@WebServlet("/createrecommendations")
+public class CreateRecommendations extends HttpServlet {
 
-    protected MoviesDao moviesDao;
+    protected RecommendationsDao recommendationsDao;
 
     @Override
     public void init() throws ServletException {
-        moviesDao = MoviesDao.getInstance();
+        recommendationsDao = RecommendationsDao.getInstance();
     }
 
     @Override
@@ -41,7 +45,7 @@ public class CreateMovies extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
         //Just render the JSP.
-        req.getRequestDispatcher("/CreateMovies.jsp").forward(req, resp);
+        req.getRequestDispatcher("/CreateRecommendations.jsp").forward(req, resp);
     }
 
     @Override
@@ -52,31 +56,29 @@ public class CreateMovies extends HttpServlet {
         req.setAttribute("messages", messages);
 
         // Retrieve and validate name.
-        String movieid = req.getParameter("movieid");
-        if (movieid == null || movieid.trim().isEmpty()) {
-            messages.put("success", "Invalid UserName");
+        String recommendationid = req.getParameter("recommendationid");
+        if (recommendationid == null || recommendationid.trim().isEmpty()) {
+            messages.put("success", "Invalid recommendationid");
         } else {
             // Create the BlogUser.
-
-            String moviename = req.getParameter("moviename");
-            String overview = req.getParameter("overview");
-            String releasedate = req.getParameter("releasedate");
-            String country = req.getParameter("country");
-            String language = req.getParameter("language");
-            String genre = req.getParameter("genre");
-            String runtime = req.getParameter("runtime");
+            String username = req.getParameter("username");
+            String movieid = req.getParameter("movieid");
+            UsersDao usersDao = UsersDao.getInstance();
+            MoviesDao moviesDao = MoviesDao.getInstance();
 
             try {
-                // Exercise: parse the input for StatusLevel.
-                Movies movies = new Movies(Integer.parseInt(movieid), moviename,overview,releasedate,country,language,genre,Integer.parseInt(runtime));
-                movies = moviesDao.create(movies);
-                messages.put("success", "Successfully created " + movieid);
+
+                Users user = usersDao.getUserFromUserName(username);
+                Movies movies = moviesDao.getMovieById(Integer.parseInt(movieid));
+                Recommendations recommendation = new Recommendations(Integer.parseInt(recommendationid), user, movies);
+                recommendation = recommendationsDao.create(recommendation);
+                messages.put("success", "Successfully created " + recommendationid);
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw new IOException(e);
             }
         }
 
-        req.getRequestDispatcher("/CreateMovies.jsp").forward(req, resp);
+        req.getRequestDispatcher("/CreateRecommmendations.jsp").forward(req, resp);
     }
 }

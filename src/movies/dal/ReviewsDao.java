@@ -247,4 +247,45 @@ public class ReviewsDao {
         }
         return reviews;
     }
+    public List<Reviews> getAllReviews() throws SQLException {
+        List<Reviews> reviews = new ArrayList<Reviews>();
+        String selectreviews = "SELECT * FROM Reviews";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        UsersDao usersDao = UsersDao.getInstance();
+        MoviesDao moviesDao = MoviesDao.getInstance();
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectreviews);
+            results = selectStmt.executeQuery();
+            while (results.next()) {
+                int resultReviewId = results.getInt("ReviewId");
+                String username = results.getString("UserName");
+                int movieId = results.getInt("MovieId");
+                Date created = new Date(results.getTimestamp("CreatedTime").getTime());
+                String content = results.getString("Content");
+                double rating = results.getDouble("Rating");
+                Users user = usersDao.getUserFromUserName(username);
+                Movies movies = moviesDao.getMovieById(movieId);
+                Reviews review = new Reviews(movieId, created, content, rating, user, movies);
+                reviews.add(review);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return reviews;
+    }
+
 }

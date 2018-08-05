@@ -1,6 +1,8 @@
 package movies.dal;
 
 import movies.model.Movies;
+import movies.model.ShowInfo;
+import movies.model.Theatre;
 import movies.model.Users;
 
 import java.sql.Connection;
@@ -8,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MoviesDao {
@@ -110,7 +113,8 @@ public class MoviesDao {
                 String language = results.getString("Language");
                 String genre = results.getString("Genre");
                 int runtime = results.getInt("Runtime");
-                Movies movies = new Movies(movieid,name,overview,releasedate,country,language,genre,runtime);
+                float avg_rating = results.getFloat("AverageRating");
+                Movies movies = new Movies(movieid,name,overview,releasedate,country,language,genre,runtime, avg_rating);
                 return movies;
             }
         } catch (SQLException e) {
@@ -151,7 +155,9 @@ public class MoviesDao {
                 String language = results.getString("Language");
                 String genre = results.getString("Genre");
                 int runtime = results.getInt("Runtime");
-                Movies movie = new Movies(movieid,name,overview,releasedate,country,language,genre,runtime);
+
+                float avg_rating = results.getFloat("AverageRating");
+                Movies movie = new Movies(movieid,name,overview,releasedate,country,language,genre,runtime, avg_rating);
                 movies1.add(movie);
             }
         } catch (SQLException e) {
@@ -191,7 +197,8 @@ public class MoviesDao {
                 String language2 = results.getString("Language");
                 String genre = results.getString("Genre");
                 int runtime = results.getInt("Runtime");
-                Movies movie = new Movies(movieid,name,overview,releasedate,country,language2,genre,runtime);
+                float avg_rating = results.getFloat("AverageRating");
+                Movies movie = new Movies(movieid,name,overview,releasedate,country,language,genre,runtime, avg_rating);
                 movies1.add(movie);
             }
         } catch (SQLException e) {
@@ -236,4 +243,44 @@ public class MoviesDao {
             }
         }
     }
+    public List<Movies> getAllMovies() throws SQLException {
+        List<Movies> movies = new ArrayList<Movies>();
+        String selectmovies = "SELECT * FROM Movie";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectmovies);
+            results = selectStmt.executeQuery();
+            while (results.next()) {
+                int movieid= results.getInt("MovieId");
+                String name = results.getString("MovieName");
+                String overview = results.getString("Overview");
+                String releasedate = results.getString("ReleaseDate");
+                String country = results.getString("Country");
+                String language2 = results.getString("Language");
+                String genre = results.getString("Genre");
+                int runtime = results.getInt("Runtime");
+                float avg_rating = results.getFloat("AverageRating");
+                Movies movie1 = new Movies(movieid,name,overview,releasedate,country,language2,genre,runtime, avg_rating);
+                movies.add(movie1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return movies;
+    }
+
 }

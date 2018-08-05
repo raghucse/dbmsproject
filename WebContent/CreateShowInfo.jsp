@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: nikithanagaraj
@@ -15,7 +16,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Delete a Theater</title>
+    <title>Create ShowInfo</title>
     <style>
         body{
             max-width: 1400px;
@@ -29,7 +30,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0-rc.2/dist/css/foundation-float.min.css" integrity="sha256-SXzNzz68b8cy/1oRvdP128/5VlvegrZO5QDmBiqhlQc= sha384-5EVTk1nWllg1T/XoVEd82fhnOxUhRUOquz4AyO3+M0kbhUzhruouReQWPnihRxPs sha512-y0IHToRgzE99SfoteKLXR0MUOTRPMQHwc4nmU2/Uqhu4KulOzK18RbuicuhlgzPDdj23skwxTWUv7CJs+psXig==" crossorigin="anonymous">
     <!-- Compressed JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0-rc.2/dist/js/foundation.min.js" integrity="sha256-G6jsRyH1fxbsvFIXSCuwYmI1aIDYBa28xscrvmYjJy0= sha384-vtoG68NvPc9azmFJr447vvY8qgdyA4FdaJ5/bqvzIM4eAdZfO0iyRRF8l2AAscYI sha512-43seCcNrHA0BQgrtyajB9sp8yOdv5c8QdYvgjP7zJ7v+dmzAcxYDQ2gupb9aztsNWBq1COIp/3NHYkQs4l/dkg==" crossorigin="anonymous"></script>
-
 </head>
 <body>
 <div class="row-expanded top-bar" style="background: black;margin-bottom: 30px;" >
@@ -50,22 +50,36 @@
 
     </div>
 </div>
-<a href="findtheatre" class="button">Back</a>
-<h1>Delete a Theater</h1>
-<form action="theatredelete" method="post">
+<a href="findshowinfo" class="button">Back</a>
+<h1>Create ShowInfo</h1>
+<form action="createshowinfo" method="post">
     <p>
-    <div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-        <label for="threatreid">Theater id</label>
-        <input id="threatreid" name="threatreid" value="${fn:escapeXml(param.threatreid)}">
-    </div>
+        <label for="showinfoid">Show Info Id</label>
+        <input id="showinfoid" name="showinfoid" value="">
     </p>
     <p>
-			<span id="submitButton" <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-			<input type="submit">
-			</span>
+        <label for="theatreid">theatre Id</label>
+        <input id="theatreid" name="theatreid" value="">
+    </p>
+    <p>
+        <label for="movieid">theatre Id</label>
+        <input id="movieid" name="movieid" value="">
+    </p>
+    <p>
+        <label for="showtime">Show Time</label>
+        <input id="showtime" name="showtime" value="">
+    </p>
+    <p>
+        <label for="price">Price</label>
+        <input id="price" name="price" value="">
+    </p>
+    <p>
+        <input type="submit">
     </p>
 </form>
 <br/><br/>
-
+<p>
+    <span id="successMessage"><b>${messages.success}</b></span>
+</p>
 </body>
 </html>

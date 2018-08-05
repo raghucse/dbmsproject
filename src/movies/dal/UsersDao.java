@@ -158,4 +158,43 @@ public class UsersDao {
         }
         return null;
     }
+
+    public List<Users> getAllUsers() throws SQLException {
+        List<Users> users = new ArrayList<Users>();
+        String selectusers = "SELECT * FROM User";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        UsersDao usersDao = UsersDao.getInstance();
+        MoviesDao moviesDao = MoviesDao.getInstance();
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectusers);
+            results = selectStmt.executeQuery();
+            while (results.next()) {
+                String resultUserName = results.getString("UserName");
+                String firstName = results.getString("FirstName");
+                String lastName = results.getString("LastName");
+                String password = results.getString("Password");
+                String email = results.getString("Email");
+                String phone = results.getString("PhoneNumber");
+                Users user = new Users(resultUserName, firstName, lastName, password, email, phone);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return users;
+    }
 }
