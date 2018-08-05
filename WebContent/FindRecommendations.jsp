@@ -1,8 +1,8 @@
-<%--
+ <%--
   Created by IntelliJ IDEA.
   User: nikithanagaraj
   Date: 7/15/18
-  Time: 6:50 PM
+  Time: 6:43 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -15,11 +15,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Delete a Theater</title>
     <style>
         body{
             max-width: 1400px;
             margin: auto !important;
+        }
+        .top-bar {
+            background-color: #000000;
         }
         .top-bar-right a:hover{
             text-decoration: underline;
@@ -29,7 +31,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0-rc.2/dist/css/foundation-float.min.css" integrity="sha256-SXzNzz68b8cy/1oRvdP128/5VlvegrZO5QDmBiqhlQc= sha384-5EVTk1nWllg1T/XoVEd82fhnOxUhRUOquz4AyO3+M0kbhUzhruouReQWPnihRxPs sha512-y0IHToRgzE99SfoteKLXR0MUOTRPMQHwc4nmU2/Uqhu4KulOzK18RbuicuhlgzPDdj23skwxTWUv7CJs+psXig==" crossorigin="anonymous">
     <!-- Compressed JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.0-rc.2/dist/js/foundation.min.js" integrity="sha256-G6jsRyH1fxbsvFIXSCuwYmI1aIDYBa28xscrvmYjJy0= sha384-vtoG68NvPc9azmFJr447vvY8qgdyA4FdaJ5/bqvzIM4eAdZfO0iyRRF8l2AAscYI sha512-43seCcNrHA0BQgrtyajB9sp8yOdv5c8QdYvgjP7zJ7v+dmzAcxYDQ2gupb9aztsNWBq1COIp/3NHYkQs4l/dkg==" crossorigin="anonymous"></script>
-
+    <title>Recommendations</title>
 </head>
 <body>
 <div class="row-expanded top-bar" style="background: black;margin-bottom: 30px;" >
@@ -50,22 +52,42 @@
 
     </div>
 </div>
-<a href="findtheatre" class="button">Back</a>
-<h1>Delete a Theater</h1>
-<form action="theatredelete" method="post">
+<form action="findrecommendations" method="post">
+    <h4 style="text-align: center">Here are the list of Recommendations available</h4>
+    <h6>Filter By Username by adding it into the input box</h6>
     <p>
-    <div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-        <label for="threatreid">Theater id</label>
-        <input id="threatreid" name="threatreid" value="${fn:escapeXml(param.threatreid)}">
-    </div>
+        <label for="username">UserName</label>
+        <input id="username" name="username" value="${fn:escapeXml(param.username)}">
     </p>
     <p>
-			<span id="submitButton" <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-			<input type="submit">
-			</span>
+        <input type="submit">
     </p>
 </form>
-<br/><br/>
+<br/>
+<div id="createrecommendations"><a  class="button" href="createrecommendations">Create Recommendations</a></div>
+<br/>
+<h1>Matching Recommendations</h1>
 
+<table border="1">
+    <tr>
+        <th>Recommendation ID</th>
+        <th>UserName</th>
+        <th>Movie ID </th>
+        <th>Delete Recommendation</th>
+        <th>Update Recommendation</th>
+
+    </tr>
+    <c:forEach items="${recommendations}" var="recommendations" >
+        <tr>
+            <td><c:out value="${recommendations.getRecommendationid()}" /></td>
+            <td><c:out value="${recommendations.getUsers().getUserName()}" /></td>
+            <td><c:out value="${recommendations.getMovies().getMoviename()}" /></td>
+            <td><a href="deleterecommendations?recommendationid=<c:out value="${recommendations.getRecommendationid()}"/>">Delete</a></td>
+            <td><a href="updaterecommendations?recommendationid=<c:out value="${recommendations.getRecommendationid()}"/>">Update</a></td>
+        </tr>
+    </c:forEach>
+</table>
 </body>
 </html>
+
+

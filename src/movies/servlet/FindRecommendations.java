@@ -18,14 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/findmovies")
-public class FindMovies extends HttpServlet {
+@WebServlet("/findrecommendations")
+public class FindRecommendations extends HttpServlet {
 
-    protected MoviesDao moviesDao;
+    protected RecommendationsDao recommendationsDao;
 
     @Override
     public void init() throws ServletException {
-        moviesDao = MoviesDao.getInstance();
+        recommendationsDao = RecommendationsDao.getInstance();
     }
 
     @Override
@@ -34,22 +34,16 @@ public class FindMovies extends HttpServlet {
         // Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-        //List<Users> users = new ArrayList<Users>();
-        List<Movies> movies = new ArrayList<Movies>();
-            try {
-                movies = moviesDao.getAllMovies();
-                System.out.println(movies);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new IOException(e);
-            }
-//            messages.put("success", "Displaying results for " + );
-//            // Save the previous search term, so it can be used as the default
-//            // in the input box when rendering FindUsers.jsp.
-          //  messages.put("previousFirstName", language);
-        req.setAttribute("movies", movies);
-
-        req.getRequestDispatcher("/FindMovies.jsp").forward(req, resp);
+        List<Recommendations> recommendations = new ArrayList<Recommendations>();
+        try {
+            recommendations = recommendationsDao.getAllRecommendations();
+            System.out.println(recommendations);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new IOException(e);
+        }
+        req.setAttribute("recommendations", recommendations);
+        req.getRequestDispatcher("/FindRecommendations.jsp").forward(req, resp);
     }
 
     @Override
@@ -58,23 +52,22 @@ public class FindMovies extends HttpServlet {
         // Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-        List<Movies> movies = new ArrayList<Movies>();
+        List<Recommendations> recommendations = new ArrayList<Recommendations>();
 
-        String language = req.getParameter("language");
-        if (language == null || language.trim().isEmpty()) {
+        String username = req.getParameter("username");
+        if (username == null || username.trim().isEmpty()) {
             messages.put("success", "Please enter a valid name.");
         } else {
             // Retrieve BlogUsers, and store as a message.
             try {
-                movies = moviesDao.getMoviesByLanguage(language);
+                recommendations = recommendationsDao.getRecommendationsByUserName(username);
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw new IOException(e);
             }
-            messages.put("success", "Displaying results for " + language);
+            messages.put("success", "Displaying results for " + username);
         }
-        req.setAttribute("movies", movies);
-
-        req.getRequestDispatcher("/FindMovies.jsp").forward(req, resp);
+        req.setAttribute("recommendations", recommendations);
+        req.getRequestDispatcher("/FindRecommendations.jsp").forward(req, resp);
     }
 }

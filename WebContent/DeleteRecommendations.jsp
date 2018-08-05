@@ -15,7 +15,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Delete a Theater</title>
+    <title>Delete a Recommendation</title>
     <style>
         body{
             max-width: 1400px;
@@ -50,13 +50,13 @@
 
     </div>
 </div>
-<a href="findtheatre" class="button">Back</a>
-<h1>Delete a Theater</h1>
-<form action="theatredelete" method="post">
+<a href="findrecommendations" class="button">Back</a>
+<h1>${messages.title}</h1>
+<form action="deleterecommendations" method="post">
     <p>
     <div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-        <label for="threatreid">Theater id</label>
-        <input id="threatreid" name="threatreid" value="${fn:escapeXml(param.threatreid)}">
+        <label for="recommendationid">Recommendationid</label>
+        <input id="recommendationid" name="recommendationid" value="${fn:escapeXml(param.recommendationid)}">
     </div>
     </p>
     <p>

@@ -76,7 +76,7 @@ public class RecommendationsDao {
      * This runs a DELETE statement.
      */
     public Recommendations delete(Recommendations recommendations) throws SQLException {
-        String deleteRecommendation = "DELETE FROM Recommendations WHERE RecommendationId=?;";
+        String deleteRecommendation = "DELETE FROM Recommendations WHERE RecommendationsId=?;";
         Connection connection = null;
         PreparedStatement deleteStmt = null;
         try {
@@ -108,9 +108,9 @@ public class RecommendationsDao {
      */
     public Recommendations getRecommendationById(int recommendationId) throws SQLException {
         String selectRecommendation =
-                "SELECT RecommendationId,UserName,RestaurantId " +
+                "SELECT RecommendationsId,UserName,MovieId " +
                         "FROM Recommendations " +
-                        "WHERE RecommendationId=?;";
+                        "WHERE RecommendationsId=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
@@ -122,7 +122,7 @@ public class RecommendationsDao {
             UsersDao usersDao = UsersDao.getInstance();
             MoviesDao moviesDao = MoviesDao.getInstance();
             if (results.next()) {
-                int resultRecommendationId = results.getInt("RecommendationId");
+                int resultRecommendationId = results.getInt("RecommendationsId");
                 String userName = results.getString("UserName");
                 int movieid = results.getInt("MovieId");
                 Users user = usersDao.getUserFromUserName(userName);
@@ -153,7 +153,7 @@ public class RecommendationsDao {
     public List<Recommendations> getRecommendationsByMovieId(int movieId) throws SQLException {
         List<Recommendations> recommendations = new ArrayList<Recommendations>();
         String selectRecommendation =
-                "SELECT RecommendationId,UserName,RestaurantId " +
+                "SELECT RecommendationsId,UserName,MovieId " +
                         "FROM Recommendations " +
                         "WHERE MovieId=?;";
         Connection connection = null;
@@ -167,7 +167,7 @@ public class RecommendationsDao {
             UsersDao usersDao = UsersDao.getInstance();
             MoviesDao moviesDao = MoviesDao.getInstance();
             while (results.next()) {
-                int recommendationid = results.getInt("RecommendationId");
+                int recommendationid = results.getInt("RecommendationsId");
                 String username = results.getString("UserName");
                 int moviesid = results.getInt("MovieId");
                 Users user = usersDao.getUserFromUserName(username);
@@ -198,7 +198,7 @@ public class RecommendationsDao {
     public List<Recommendations> getRecommendationsByUserName(String userName) throws SQLException {
         List<Recommendations> recommendations = new ArrayList<Recommendations>();
         String selectRecommendation =
-                "SELECT RecommendationId,UserName,RestaurantId " +
+                "SELECT RecommendationsId,UserName,MovieId " +
                         "FROM Recommendations " +
                         "WHERE MovieId=?;";
         Connection connection = null;
@@ -212,9 +212,9 @@ public class RecommendationsDao {
             UsersDao usersDao = UsersDao.getInstance();
             MoviesDao moviesDao = MoviesDao.getInstance();
             while (results.next()) {
-                int recommendationid = results.getInt("RecommendationId");
+                int recommendationid = results.getInt("RecommendationsId");
                 String username = results.getString("UserName");
-                int movieid = results.getInt("RestaurantId");
+                int movieid = results.getInt("MovieId");
                 Users user = usersDao.getUserFromUserName(username);
                 Movies movies = moviesDao.getMovieById(movieid);
                 Recommendations recommendation = new Recommendations(recommendationid, user, movies);
@@ -237,4 +237,68 @@ public class RecommendationsDao {
         return recommendations;
     }
 
+    public List<Recommendations> getAllRecommendations() throws SQLException {
+        List<Recommendations> recommendations = new ArrayList<Recommendations>();
+        String selectrecommendations = "SELECT * FROM Recommendations";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        UsersDao usersDao = UsersDao.getInstance();
+        MoviesDao moviesDao = MoviesDao.getInstance();
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectrecommendations);
+            results = selectStmt.executeQuery();
+            while (results.next()) {
+                int recommendationid = results.getInt("RecommendationsId");
+                String username = results.getString("UserName");
+                int movieid = results.getInt("MovieId");
+                Users user = usersDao.getUserFromUserName(username);
+                Movies movies = moviesDao.getMovieById(movieid);
+                Recommendations recommendation = new Recommendations(recommendationid, user, movies);
+                recommendations.add(recommendation);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return recommendations;
+    }
+    public Recommendations updateUsername(Recommendations recommendations, String username) throws SQLException {
+        String updateRecommendation = "UPDATE Recommendations SET UserName=? WHERE RecommendationsId=?;";
+        Connection connection = null;
+        PreparedStatement updateStmt = null;
+        UsersDao usersDao = UsersDao.getInstance();
+        try {
+            connection = connectionManager.getConnection();
+            updateStmt = connection.prepareStatement(updateRecommendation);
+            updateStmt.setString(1, username);
+            updateStmt.setInt(2, recommendations.getRecommendationid());
+            updateStmt.executeUpdate();
+            Users users = usersDao.getUserFromUserName(username);
+            // Update the person param before returning to the caller.
+            recommendations.setUsers(users);
+            return recommendations;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (updateStmt != null) {
+                updateStmt.close();
+            }
+        }
+    }
 }

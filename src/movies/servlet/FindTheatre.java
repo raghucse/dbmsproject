@@ -34,43 +34,23 @@ public class FindTheatre extends HttpServlet {
         // Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-
-        //List<Users> users = new ArrayList<Users>();
         List<Theatre> theatres = new ArrayList<Theatre>();
-
-        // Retrieve and validate name.
-        // firstname is retrieved from the URL query string.
-        String location = req.getParameter("location");
-        if (location == null || location.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid name.");
-        } else {
-            // Retrieve BlogUsers, and store as a message.
             try {
-                theatres = theatreDao.getTheatreByLocation(location);
+                theatres = theatreDao.getAllTheatres();
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw new IOException(e);
             }
-            messages.put("success", "Displaying results for " + location);
-            // Save the previous search term, so it can be used as the default
-            // in the input box when rendering FindUsers.jsp.
-            messages.put("previousFirstName", location);
-        }
         req.setAttribute("theatres", theatres);
-
         req.getRequestDispatcher("/FindTheatre.jsp").forward(req, resp);
     }
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        // Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
         List<Theatre> theatres = new ArrayList<Theatre>();
-        // Retrieve and validate name.
-        // firstname is retrieved from the form POST submission. By default, it
-        // is populated by the URL query string (in FindUsers.jsp).
         String location = req.getParameter("location");
         if (location == null || location.trim().isEmpty()) {
             messages.put("success", "Please enter a valid name.");
