@@ -21,12 +21,14 @@ public class DashBoardSearch extends HttpServlet {
     protected UsersDao usersDao;
     protected FollowersDao followersDao;
     protected FollowingDao followingDao;
+    protected MoviesDao moviesDao;
 
     @Override
     public void init() throws ServletException {
         usersDao = UsersDao.getInstance();
         followersDao = FollowersDao.getInstance();
         followingDao = FollowingDao.getInstance();
+        moviesDao = MoviesDao.getInstance();
     }
 
     @Override
@@ -35,6 +37,7 @@ public class DashBoardSearch extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
 
+        List<Movies> movies = null;
         Users users = null;
         int followers;
         int following;
@@ -59,6 +62,16 @@ public class DashBoardSearch extends HttpServlet {
             req.getRequestDispatcher("/searchProfile.jsp").forward(req, resp);
         }else {
         	//code for movie search
+            System.out.println("Searching Movies");
+            try{
+                movies = moviesDao.getMovieByName(search);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw new IOException(e);
+            }
+            req.setAttribute("movies",movies);
+            req.getRequestDispatcher("/SearchMovies.jsp").forward(req, resp);
+
         }
     }
 }
