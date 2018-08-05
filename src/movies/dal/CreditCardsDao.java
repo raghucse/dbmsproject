@@ -161,9 +161,7 @@ public class CreditCardsDao {
             throws SQLException {
         List<CreditCards> creditCards = new ArrayList<CreditCards>();
         String selectCreditcards =
-                "SELECT CreditCards.UserName AS UserName,ExpirationDate,CardNumber " + "" +
-                        "FROM CreditCards INNER JOIN Users" +
-                        " ON CreditCards.UserName = Users.UserName WHERE CreditCards.UserName = ?;";
+                "SELECT CreditCards.UserName AS UserName,ExpirationDate,CardNumber FROM CreditCards where CreditCards.UserName = ?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
