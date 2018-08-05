@@ -200,7 +200,7 @@ public class RecommendationsDao {
         String selectRecommendation =
                 "SELECT RecommendationsId,UserName,MovieId " +
                         "FROM Recommendations " +
-                        "WHERE MovieId=?;";
+                        "WHERE UserName=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
