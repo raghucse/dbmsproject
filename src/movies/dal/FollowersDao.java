@@ -48,7 +48,27 @@ public class FollowersDao {
         }
     }
 
-
+    public boolean checkEntry(String user, String follower) throws SQLException{
+        String selectfollower = "SELECT * from Followers WHERE UserName=? and FollowerName=? ;";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        try {
+	        connection = connectionManager.getConnection();
+	        selectStmt = connection.prepareStatement(selectfollower);
+	        selectStmt.setString(1, user);
+	        selectStmt.setString(2, follower);
+	        results = selectStmt.executeQuery();
+	        if (results.next()) {
+	            return true;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        throw e;
+	    }
+        return false;
+    }
+    
     /**
      * Delete the BlogUsers instance.
      * This runs a DELETE statement.
@@ -92,9 +112,8 @@ public class FollowersDao {
                 int followerId = results.getInt("ID");
                 String username = results.getString("UserName");
                 String followername = results.getString("FollowerName");
-                Users user = usersDao.getUserFromUserName(username);
-                Users user2 = usersDao.getUserFromUserName(followername);
-                Followers followers = new Followers(followerid, user, user2);
+                Followers followers = new Followers(username, followername);
+                followers.setFollowerid(followerid);
                 return followers;
             }
         } catch (SQLException e) {
@@ -132,9 +151,8 @@ public class FollowersDao {
                 int followerid = results.getInt("ID");
                 String user = results.getString("UserName");
                 String followername = results.getString("FollowerName");
-                Users user1 = usersDao.getUserFromUserName(username);
-                Users user2 = usersDao.getUserFromUserName(followername);
-                Followers follower = new Followers(followerid, user1, user2);
+                Followers follower = new Followers(user, followername);
+                follower.setFollowerid(followerid);
                 followers.add(follower);
             }
         } catch (SQLException e) {
