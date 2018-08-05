@@ -8,11 +8,17 @@
 <html>
 <head>
     <link rel="stylesheet" href="CSS/searchprofile.css">
+    <link rel="stylesheet" href="CSS/navbar.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
+<div class="topnav">
+    <a class="active" href="DashBoard.jsp">Home</a>
+    <a href="loginUser" class="pull-right">Logout</a>
+    <a href="profile" class="pull-right">Profile</a>
+</div>
 <div class="container">
     <div class="row">
         <h1>Profile</h1>
