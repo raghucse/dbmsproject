@@ -2,6 +2,7 @@ package movies.dal;
 
 import movies.dal.ConnectionManager;
 import movies.model.CreditCards;
+import movies.model.Movies;
 import movies.model.Users;
 
 import java.sql.Connection;
@@ -179,6 +180,41 @@ public class CreditCardsDao {
                 Users username = usersDao.getUserFromUserName(resultuserName);
                 CreditCards blogUser = new CreditCards(cardnumber, expiration, username);
                 creditCards.add(blogUser);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return creditCards;
+    }
+    public List<CreditCards> getAllCreditCards() throws SQLException {
+        List<CreditCards> creditCards = new ArrayList<CreditCards>();
+        String selectcreditcards = "SELECT * FROM CreditCards";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        UsersDao usersDao = UsersDao.getInstance();
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectcreditcards);
+            results = selectStmt.executeQuery();
+            while (results.next()) {
+                String resultuserName = results.getString("UserName");
+                long cardnumber = results.getLong("CardNumber");
+                Date expiration = results.getDate("Expiration");
+                Users username = usersDao.getUserFromUserName(resultuserName);
+                CreditCards user = new CreditCards(cardnumber, expiration, username);
+                creditCards.add(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();

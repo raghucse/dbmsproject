@@ -10,7 +10,30 @@ public class Movies {
     protected String genre;
     protected int runtime;
 
+    public float getAvg_rating() {
+        return avg_rating;
+    }
 
+    public void setAvg_rating(float avg_rating) {
+        this.avg_rating = avg_rating;
+    }
+
+    protected float avg_rating;
+
+
+    public Movies(int moviesId,String moviename, String overview, String releasedate, String country, String language, String genre, int runtime,
+                  float avg_rating) {
+        this.moviesId=moviesId;
+        this.moviename = moviename;
+        this.overview = overview;
+        this.releasedate =releasedate;
+        this.country = country;
+        this.language = language;
+
+        this.genre = genre;
+        this.runtime = runtime;
+        this.avg_rating = avg_rating;
+    }
     public Movies(int moviesId,String moviename, String overview, String releasedate, String country, String language, String genre, int runtime) {
         this.moviesId=moviesId;
         this.moviename = moviename;
@@ -89,6 +112,7 @@ public class Movies {
     public void setRuntime(int runtime) {
         this.runtime = runtime;
     }
+
 
 
 
