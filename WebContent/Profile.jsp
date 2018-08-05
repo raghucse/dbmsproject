@@ -28,48 +28,48 @@
                     <h3 class="panel-title">${user.getUserName()}</h3>
                 </div>
                 <div class="panel-body">
-                        <div class=" col-md-9 col-lg-9 ">
-                            <table class="table table-user-information">
-                                <tbody>
-                                <tr>
-                                    <td>First name:</td>
-                                    <td>${user.getFirstName()}</td>
-                                </tr>
-                                <tr>
-                                    <td>Last name:</td>
-                                    <td>${user.getLastName()}</td>
-                                </tr>
-                                <tr>
-                                    <td>Email:</td>
-                                    <td>${user.getEmail()}</td>
-                                </tr>
-                                <td>Phone Number:</td>
-                                <td>${user.getPhone()}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                    <div class=" col-md-9 col-lg-9 ">
+                        <table class="table table-user-information">
+                            <tbody>
+                            <tr>
+                                <td>First name:</td>
+                                <td>${user.getFirstName()}</td>
+                            </tr>
+                            <tr>
+                                <td>Last name:</td>
+                                <td>${user.getLastName()}</td>
+                            </tr>
+                            <tr>
+                                <td>Email:</td>
+                                <td>${user.getEmail()}</td>
+                            </tr>
+                            <td>Phone Number:</td>
+                            <td>${user.getPhone()}</td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                            <span class="twPc-StatLabel twPc-block">Following:</span>
-                            <span class="twPc-StatValue">${Following}</span>
+                        <span class="twPc-StatLabel twPc-block">Following:</span>
+                        <span class="twPc-StatValue">${Following}</span>
 
-							<span class="twPc-StatValue pull-right">${Followers}</span>
-                            <span class="twPc-StatLabel twPc-block pull-right">Followers:</span>
-                        </div>
+                        <span class="twPc-StatValue pull-right">${Followers}</span>
+                        <span class="twPc-StatLabel twPc-block pull-right">Followers:</span>
                     </div>
-                                    <div class="panel-footer">
+                </div>
+                <div class="panel-footer">
                     <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
                        class="btn btn-sm btn-primary">Credit cards</a>
                     <span class="pull-right">
                         <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                           class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
                         <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                           class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                     </span>
-                </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

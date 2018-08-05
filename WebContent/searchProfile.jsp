@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
+         pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,9 +26,9 @@
             <a class="twPc-bg twPc-block"></a>
 
             <div>
-            	<c:if test="${not empty Users}">
-            	    <a class="btn btn-primary pull-right" href="followUser">Follow</a>
-            	</c:if>   
+                <c:if test="${not empty Users}">
+                    <a class="btn btn-primary pull-right" href="followUser">Follow</a>
+                </c:if>
                 <a class="twPc-avatarLink">
                     <img alt="Profile Image" src="https://image.ibb.co/gshJmK/contact.png" class="twPc-avatarImg">
                 </a>
@@ -44,18 +44,18 @@
 
                 <div class="twPc-divStats">
                     <ul class="twPc-Arrange">
-                    	<c:if test="${not empty Following}">
-	                        <li class="twPc-ArrangeSizeFit">
-	                            <span class="twPc-StatLabel twPc-block">Following</span>
-	                            <span class="twPc-StatValue">${Following}</span>
-	                        </li>
+                        <c:if test="${not empty Following}">
+                            <li class="twPc-ArrangeSizeFit">
+                                <span class="twPc-StatLabel twPc-block">Following</span>
+                                <span class="twPc-StatValue">${Following}</span>
+                            </li>
                         </c:if>
                         <c:if test="${not empty Followers}">
-	                        <li class="twPc-ArrangeSizeFit">
-	                            <span class="twPc-StatLabel twPc-block">Followers</span>
-	                            <span class="twPc-StatValue">${Followers}</span>
-	                        </li>
-	                    </c:if>   
+                            <li class="twPc-ArrangeSizeFit">
+                                <span class="twPc-StatLabel twPc-block">Followers</span>
+                                <span class="twPc-StatValue">${Followers}</span>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
