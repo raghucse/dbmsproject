@@ -24,10 +24,12 @@ import javax.servlet.http.HttpServletResponse;
 public class FindShowInfo extends HttpServlet {
 
     protected ShowInfoDao showInfoDao;
+    protected MoviesDao moviesDao;
 
     @Override
     public void init() throws ServletException {
         showInfoDao = ShowInfoDao.getInstance();
+        moviesDao = MoviesDao.getInstance();
     }
 
     @Override
@@ -40,6 +42,7 @@ public class FindShowInfo extends HttpServlet {
         List<ShowInfo> showInfos = new ArrayList<ShowInfo>();
         try{
             showInfos = showInfoDao.getAllShowInfo();
+//            moviesDao
             System.out.println(showInfos);
         } catch (SQLException e) {
             e.printStackTrace();

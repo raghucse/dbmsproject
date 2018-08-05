@@ -60,7 +60,7 @@ public class CreateMovies extends HttpServlet {
 
             String moviename = req.getParameter("moviename");
             String overview = req.getParameter("overview");
-            String releasedate = req.getParameter("releastedate");
+            String releasedate = req.getParameter("releasedate");
             String country = req.getParameter("country");
             String language = req.getParameter("language");
             String genre = req.getParameter("genre");

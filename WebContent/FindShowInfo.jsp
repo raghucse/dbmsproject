@@ -54,8 +54,8 @@
     <c:forEach items="${showinfo}" var="showinfo" >
         <tr>
             <td><c:out value="${showinfo.getShowinfoid()}" /></td>
-            <td><c:out value="${showinfo.getTheatre().getTheatreid()}" /></td>
-            <td><c:out value="${showinfo.getMovies().getMoviesId}" /></td>
+            <td><c:out value="${showinfo.getTheatre().getTheatrename()}" /></td>
+            <td><c:out value="${showinfo.getMovies().getMoviename()}" /></td>
             <td><c:out value="${showinfo.getPrice()}" /></td>
             <td><c:out value="${showinfo.getShowtime()}" /></td>
             <td><a href="deleteshowinof?showinfoid=<c:out value="${showinfo.getShowinfoid()}"/>">Delete</a></td>
