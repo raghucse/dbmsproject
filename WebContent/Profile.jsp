@@ -63,7 +63,7 @@
                         <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button"
                            class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
                         <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                           class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                           class="btn btn-sm btn-danger" href="userdelete"><i class="glyphicon glyphicon-remove"></i></a>
                     </span>
                 </div>
             </div>
