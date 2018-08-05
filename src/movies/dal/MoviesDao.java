@@ -134,6 +134,49 @@ public class MoviesDao {
         return null;
     }
 
+    public List<Movies> getMovieByName(String moviename) throws SQLException {
+        List<Movies> moviesList = new ArrayList<>();
+        String selectmovies = "SELECT * FROM Movie WHERE MovieName = ?;";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectmovies);
+            selectStmt.setString(1, moviename);
+            results = selectStmt.executeQuery();
+            while (results.next()) {
+                int movieid = results.getInt("MovieId");
+                String name = results.getString("MovieName");
+                String overview = results.getString("Overview");
+                String releasedate = results.getString("ReleaseDate");
+                String country = results.getString("Country");
+                String language = results.getString("Language");
+                String genre = results.getString("Genre");
+                int runtime = results.getInt("Runtime");
+
+                float avg_rating = results.getFloat("AverageRating");
+                Movies movie = new Movies(movieid, name, overview, releasedate, country, language, genre, runtime, avg_rating);
+                moviesList.add(movie);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return moviesList;
+    }
+
     public List<Movies> getMoviesByCountry(Movies movies) throws SQLException {
         List<Movies> movies1 = new ArrayList<Movies>();
         String selectmovies =
