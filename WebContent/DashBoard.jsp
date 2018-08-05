@@ -16,7 +16,7 @@
 <body>
 <div class="topnav">
     <a class="active" href="DashBoard.jsp">Home</a>
-    <a href="loginUser" class="pull-right">Logout</a>
+    <a href="logoutUser" class="pull-right">Logout</a>
     <a href="profile" class="pull-right">Profile</a>
 </div>	
 <div class="container" style="margin-top: 8%;">
