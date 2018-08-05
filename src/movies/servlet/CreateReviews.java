@@ -6,6 +6,7 @@ import movies.model.Movies;
 import movies.model.Users;
 import movies.model.Reviews;
 import movies.dal.ReviewsDao;
+import movies.servlet.Helper;
 
 import javax.servlet.annotation.*;
 import javax.servlet.ServletException;
@@ -58,13 +59,6 @@ public class CreateReviews extends HttpServlet {
         } else {
             // Create the BlogUser.
 
-//            this.created = created;
-//            this.content = content;
-//            this.rating = rating;
-//            this.users = users;
-//            this.movies = movies;
-
-//            Date created = new Date(req.getParameter("created"));
 
             try {
                 // Exercise: parse the input for StatusLevel.
