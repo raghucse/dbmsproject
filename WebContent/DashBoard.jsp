@@ -9,6 +9,7 @@
 <head>
     <link rel="stylesheet" href="CSS/dashboard.css">
     <link rel="stylesheet" href="CSS/navbar.css">
+    <link rel="stylesheet" href="CSS/main.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -23,14 +24,15 @@
     <div class="col-md-6 col-md-offset-3">
         <div class="row">
             <div id="logo" class="text-center">
-                <h1>Welcome</h1><p>Movie Talk</p>
+                <h2>Welcome</h2>
+
             </div>
             <form role="form" id="form-buscar" action="dashboardsearch" method="get">
                 <div class="form-group">
                     <div class="input-group">
                         <input id="1" class="form-control" type="text" name="search" placeholder="Search..." required/>
                         <span class="input-group-btn">
-                            <button class="btn btn-success" type="submit">
+                            <button class="btn" type="submit">
                                 <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Search
                             </button>
 						</span>

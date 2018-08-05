@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="topnav">
-    <a class="active" href="DashBoard.jsp">Home</a>
+    <a class="active" href="DashBoard.jsp">MovieTalk</a>
     <a href="logoutUser" class="pull-right">Logout</a>
     <a href="profile" class="pull-right">Profile</a>
 </div>
