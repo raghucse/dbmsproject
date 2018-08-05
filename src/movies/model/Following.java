@@ -3,12 +3,11 @@ package movies.model;
 public class Following {
     protected  int follwingid;
     protected String followingname;
-    protected String users;
+    protected String user;
 
-    public Following(int followingid, Users users, Users following) {
-        this.follwingid = follwingid;
-        this.users = users.getUserName();
-        this.followingname = following.getUserName();
+    public Following(String users, String following) {
+        this.user = users;
+        this.followingname = following;
     }
 
     public String getFollowingname() {
@@ -27,12 +26,12 @@ public class Following {
         this.follwingid = follwingid;
     }
 
-    public String getUsers() {
-        return users;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users.getUserName();
+    public void setUser(String user) {
+        this.user = user;
     }
 
 

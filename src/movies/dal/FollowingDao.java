@@ -34,7 +34,7 @@ public class FollowingDao {
             connection = connectionManager.getConnection();
             insertStmt = connection.prepareStatement(insertfollowing);
             insertStmt.setInt(1, following.getFollwingid());
-            insertStmt.setString(2, following.getUsers());
+            insertStmt.setString(2, following.getUser());
             insertStmt.setString(3, following.getFollowingname());
             insertStmt.executeUpdate();
             return following;
@@ -95,9 +95,8 @@ public class FollowingDao {
                 int followingId = results.getInt("ID");
                 String username = results.getString("UserName");
                 String followingname = results.getString("FollowingName");
-                Users user = usersDao.getUserFromUserName(username);
-                Users user2 = usersDao.getUserFromUserName(followingname);
-                Following following = new Following(followingId, user, user2);
+                Following following = new Following(username, followingname);
+                following.setFollwingid(followingId);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -134,9 +133,8 @@ public class FollowingDao {
                 int followingid = results.getInt("ID");
                 String user = results.getString("UserName");
                 String followingname = results.getString("FollowingName");
-                Users user1 = usersDao.getUserFromUserName(username);
-                Users user2 = usersDao.getUserFromUserName(followingname);
-                Following following1 = new Following(followingid, user1, user2);
+                Following following1 = new Following(username,followingname);
+                following1.setFollwingid(followingid);
                 following.add(following1);
             }
         } catch (SQLException e) {
