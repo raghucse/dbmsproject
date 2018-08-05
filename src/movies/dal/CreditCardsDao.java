@@ -36,7 +36,7 @@ public class CreditCardsDao {
     }
 
     public CreditCards create(CreditCards creditCards) throws SQLException {
-        String insertCreditcard = "INSERT INTO CreditCards(CardNumber,Expiration,UserName) VALUES(?,?,?);";
+        String insertCreditcard = "INSERT INTO CreditCards(CardNumber,ExpirationDate,UserName) VALUES(?,?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;
         try {
@@ -65,7 +65,7 @@ public class CreditCardsDao {
      * This runs a UPDATE statement.
      */
     public CreditCards updateExpiration(CreditCards creditCard, Date newExpiration) throws SQLException {
-        String updateCard = "UPDATE CreditCards SET Expiration=? WHERE CardNumber=?;";
+        String updateCard = "UPDATE CreditCards SET ExpirationDate=? WHERE CardNumber=?;";
         Connection connection = null;
         PreparedStatement updateStmt = null;
         try {
@@ -122,7 +122,7 @@ public class CreditCardsDao {
     }
 
     public CreditCards getCreditCardByCardNumber(long cardNumber) throws SQLException {
-        String selectCard = "SELECT CardNumber,Expiration,UserName FROM CreditCards WHERE CardNumber=?;";
+        String selectCard = "SELECT CardNumber,ExpirationDate,UserName FROM CreditCards WHERE CardNumber=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
@@ -134,7 +134,7 @@ public class CreditCardsDao {
             UsersDao usersDao = UsersDao.getInstance();
             if (results.next()) {
                 Long resultCardNumber = results.getLong("CardNumber");
-                Date expiration = results.getDate("Expiration");
+                Date expiration = results.getDate("ExpirationDate");
                 String username = results.getString("UserName");
                 Users user = usersDao.getUserFromUserName(username);
                 CreditCards creditCards = new CreditCards(resultCardNumber, expiration, user);
@@ -161,7 +161,7 @@ public class CreditCardsDao {
             throws SQLException {
         List<CreditCards> creditCards = new ArrayList<CreditCards>();
         String selectCreditcards =
-                "SELECT CreditCards.UserName AS UserName,Expiration,CardNumber " + "" +
+                "SELECT CreditCards.UserName AS UserName,ExpirationDate,CardNumber " + "" +
                         "FROM CreditCards INNER JOIN Users" +
                         " ON CreditCards.UserName = Users.UserName WHERE CreditCards.UserName = ?;";
         Connection connection = null;
@@ -176,7 +176,7 @@ public class CreditCardsDao {
             while (results.next()) {
                 String resultuserName = results.getString("UserName");
                 long cardnumber = results.getLong("CardNumber");
-                Date expiration = results.getDate("Expiration");
+                Date expiration = results.getDate("ExpirationDate");
                 Users username = usersDao.getUserFromUserName(resultuserName);
                 CreditCards blogUser = new CreditCards(cardnumber, expiration, username);
                 creditCards.add(blogUser);
@@ -211,7 +211,7 @@ public class CreditCardsDao {
             while (results.next()) {
                 String resultuserName = results.getString("UserName");
                 long cardnumber = results.getLong("CardNumber");
-                Date expiration = results.getDate("Expiration");
+                Date expiration = results.getDate("ExpirationDate");
                 Users username = usersDao.getUserFromUserName(resultuserName);
                 CreditCards user = new CreditCards(cardnumber, expiration, username);
                 creditCards.add(user);
