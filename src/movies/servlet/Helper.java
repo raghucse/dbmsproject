@@ -23,15 +23,14 @@ public class Helper {
 
     public static String getUsernameFromCookie(HttpServletRequest req){
         Cookie[] cookies = req.getCookies();
-        String user = null;
-        String searchUser = null;
+        String username = null;
         for (int i = 0; i < cookies.length; i++) {
             String name = cookies[i].getName();
             if(name.equals("user")){
-                user = cookies[i].getValue();
+                username = cookies[i].getValue();
             }
         }
-        return user;
+        return username;
 
     }
 
