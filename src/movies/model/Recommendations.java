@@ -22,6 +22,10 @@ public class Recommendations {
         this.movies = movies;
     }
 
+    public Recommendations(int recommendationid) {
+        this.recommendationid = recommendationid;
+    }
+
     public int getRecommendationid() {
         return recommendationid;
     }
