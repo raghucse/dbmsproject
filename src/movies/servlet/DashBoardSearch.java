@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.annotation.*;
@@ -43,7 +42,6 @@ public class DashBoardSearch extends HttpServlet {
         String selection = req.getParameter("selection");
         
         if(selection.equals("0")) {
-        	System.out.println("searching User");
             try {
                 users = usersDao.getUserFromUserName(search);
                 followers = followersDao.getFollowersByUserName(search).size();
