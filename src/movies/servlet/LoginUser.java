@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.servlet.annotation.*;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,7 +51,10 @@ public class LoginUser extends HttpServlet {
                 req.getRequestDispatcher("/Login.jsp").forward(req, resp);
             }
             req.setAttribute("Users", users);
-        	req.getRequestDispatcher("/FindUsers.jsp").forward(req, resp);
+            Cookie user = new Cookie("user",
+       			  username);
+			resp.addCookie(user);
+        	resp.sendRedirect("DashBoard.jsp");
         }
 
 	}
