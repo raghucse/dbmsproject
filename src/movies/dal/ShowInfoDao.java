@@ -181,6 +181,47 @@ public class ShowInfoDao {
         return showInfos;
     }
 
+    public List<ShowInfo> getShowInfoByMovie(int movieId) throws SQLException {
+        List<ShowInfo> showInfos = new ArrayList<>();
+        String selectShows = "SELECT * FROM ShowInfo WHERE MovieId = ?;";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectShows);
+            selectStmt.setInt(1,movieId);
+            selectStmt.executeUpdate();
+            TheatreDao theatreDao = TheatreDao.getInstance();
+            MoviesDao moviesDao = MoviesDao.getInstance();
+            while (results.next()) {
+                int resultsshowinfoid = results.getInt("ShowInfoId");
+                int price = results.getInt("Price");
+                int theatreid = results.getInt("TheatreId");
+                int movieid = results.getInt("MovieId");
+                Date showtime = results.getDate("ShowTime");
+                Theatre theatre = theatreDao.getTheatreById(theatreid);
+                Movies movies = moviesDao.getMovieById(movieid);
+                ShowInfo showInfo = new ShowInfo(resultsshowinfoid,theatre,movies,price,showtime);
+                showInfos.add(showInfo);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return showInfos;
+    }
+
     public List<ShowInfo> getAllShowInfo() throws SQLException {
         List<ShowInfo> showInfos = new ArrayList<ShowInfo>();
         String selectshowinfo =
