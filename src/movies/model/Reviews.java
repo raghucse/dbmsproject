@@ -15,6 +15,9 @@ public class Reviews {
     protected Users users;
     protected Movies movies;
 
+    public Reviews(int reviewsid){
+        this.reviewsid = reviewsid;
+    }
 
     public Reviews(int reviewsid, Date created, String content, double rating, Users users,
                    Movies movies) {
@@ -35,6 +38,13 @@ public class Reviews {
         this.users = users;
         this.movies = movies;
 
+    }
+
+    public Reviews(String content, double rating, Users users, Movies movies){
+        this.content = content;
+        this.rating = rating;
+        this.users = users;
+        this.movies = movies;
     }
 
     public int getReviewsid() {

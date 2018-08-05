@@ -10,9 +10,6 @@ import java.util.Date;
 import java.util.List;
 
 
-/**
- * @author nikithanagaraj
- */
 public class ReviewsDao {
     private static ReviewsDao instance = null;
     protected ConnectionManager connectionManager;
@@ -30,8 +27,8 @@ public class ReviewsDao {
 
     public Reviews create(Reviews reviews) throws SQLException {
         String insertReview =
-                "INSERT INTO Reviews(CreatedTime,Content,Rating,UserName,UserName) " +
-                        "VALUES(?,?,?,?,?);";
+                "INSERT INTO Reviews(Content,Rating,MovieId,UserName) " +
+                        "VALUES(?,?,?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;
         ResultSet resultKey = null;
@@ -39,11 +36,10 @@ public class ReviewsDao {
         try {
             connection = connectionManager.getConnection();
             insertStmt = connection.prepareStatement(insertReview, Statement.RETURN_GENERATED_KEYS);
-            insertStmt.setTimestamp(1, new Timestamp(reviews.getCreated().getTime()));
-            insertStmt.setString(2, reviews.getContent());
-            insertStmt.setDouble(3, reviews.getRating());
+            insertStmt.setString(1, reviews.getContent());
+            insertStmt.setDouble(2, reviews.getRating());
+            insertStmt.setInt(3, reviews.getMovies().getMoviesId());
             insertStmt.setString(4, reviews.getUsers().getUserName());
-            insertStmt.setInt(5, reviews.getMovies().getMoviesId());
             insertStmt.executeUpdate();
 
             // Retrieve the auto-generated key and set it, so it can be used by the caller.
@@ -286,6 +282,35 @@ public class ReviewsDao {
             }
         }
         return reviews;
+    }
+
+    public Reviews updateReview(Reviews review, String content, Double rating) throws SQLException {
+        String updateReview = "UPDATE Reviews SET Content=?, Rating=? WHERE ReviewId=?;";
+        Connection connection = null;
+        PreparedStatement updateStmt = null;
+        UsersDao usersDao = UsersDao.getInstance();
+        try {
+            connection = connectionManager.getConnection();
+            updateStmt = connection.prepareStatement(updateReview);
+            updateStmt.setString(1, content);
+            updateStmt.setDouble(2, rating);
+            updateStmt.setInt(3, review.getReviewsid());
+            updateStmt.executeUpdate();
+            review.setContent(content);
+            review.setRating(rating);
+            return review;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (updateStmt != null) {
+                updateStmt.close();
+            }
+        }
     }
 
 }

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
-  User: nikithanagaraj
-  Date: 7/15/18
-  Time: 6:50 PM
+  User: harsh
+  Date: 8/5/18
+  Time: 11:52 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -15,7 +15,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Delete a Movie</title>
+    <title>Delete a Review</title>
     <style>
         body{
             max-width: 1400px;
@@ -47,18 +47,17 @@
             <li  style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findrecommendations">Recommendations</a> </li>
             <li style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findshowinfo">ShowTimes</a> </li>
             <li style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findreviews">Reviews</a> </li>
-
         </ul>
 
     </div>
 </div>
-<a href="findmovies" class="button">Back</a>
+<a href="findreviews" class="button">Back</a>
 <h1>${messages.title}</h1>
-<form action="deletemovies" method="post">
+<form action="deletereviews" method="post">
     <p>
     <div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-        <label for="movieid">MovieId</label>
-        <input id="movieid" name="movieid" value="${fn:escapeXml(param.movieid)}">
+        <label for="reviewid">ReviewId</label>
+        <input id="reviewid" name="reviewid" value="${fn:escapeXml(param.recommendationid)}">
     </div>
     </p>
     <p>
