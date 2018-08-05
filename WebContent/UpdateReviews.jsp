@@ -1,21 +1,21 @@
 <%--
   Created by IntelliJ IDEA.
-  User: nikithanagaraj
-  Date: 7/15/18
-  Time: 6:50 PM
+  User: harsh
+  Date: 8/5/18
+  Time: 9:48 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Delete a Movie</title>
+    <title>Update a Review</title>
     <style>
         body{
             max-width: 1400px;
@@ -44,7 +44,7 @@
             <li  style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findcreditcard">CreditCard</a> </li>
             <li style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findmovies">Movies</a> </li>
             <li style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findtheatre">Theatre</a> </li>
-            <li  style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findrecommendations">Recommendations</a> </li>
+            <li  style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findreviews">reviews</a> </li>
             <li style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findshowinfo">ShowTimes</a> </li>
             <li style="color:white;font-size: 16px;"><a style="color:white;font-size: 16px;" href="findreviews">Reviews</a> </li>
 
@@ -52,22 +52,28 @@
 
     </div>
 </div>
-<a href="findmovies" class="button">Back</a>
-<h1>${messages.title}</h1>
-<form action="deletemovies" method="post">
+<a href="findreviews" class="button">Back</a>
+<h1>Update Review</h1>
+<form action="updatereviews" method="post">
     <p>
-    <div <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-        <label for="movieid">MovieId</label>
-        <input id="movieid" name="movieid" value="${fn:escapeXml(param.movieid)}">
-    </div>
+        <label for="reviewid">Review Id</label>
+        <input id="reviewid" name="reviewid" value="${fn:escapeXml(param.reviewid)}">
     </p>
     <p>
-			<span id="submitButton" <c:if test="${messages.disableSubmit}">style="display:none"</c:if>>
-			<input type="submit">
-			</span>
+        <label for="content">Content</label>
+        <input id="content" name="content">
+    </p>
+    <p>
+        <label for="rating">Rating</label>
+        <input id="rating" name="rating" type="number">
+    </p>
+    <p>
+        <input type="submit">
     </p>
 </form>
 <br/><br/>
-
+<p>
+    <span id="successMessage"><b>${messages.success}</b></span>
+</p>
 </body>
 </html>
