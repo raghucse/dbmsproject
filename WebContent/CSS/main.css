@@ -3,6 +3,6 @@
     border-color: #00376f;
     color: white;
 }
-.btn:hover {
+.btn:hover ,.btn:focus, .btn:active{
     color: white !important;
 }
