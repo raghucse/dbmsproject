@@ -191,7 +191,7 @@ public class ShowInfoDao {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectShows);
             selectStmt.setInt(1,movieId);
-            selectStmt.executeUpdate();
+            results = selectStmt.executeQuery();
             TheatreDao theatreDao = TheatreDao.getInstance();
             MoviesDao moviesDao = MoviesDao.getInstance();
             while (results.next()) {
