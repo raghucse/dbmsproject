@@ -50,7 +50,7 @@
             </form>
         </div>
                 <a href="/usermovies" class="btn btn-lg btn-block">Show Recommended Movies</a>
-                <a href="AllMoviesUser.jsp" class="btn btn-lg btn-block">Show All Movies</a>
+                <a href="/allmoviesuser" class="btn btn-lg btn-block">Show All Movies</a>
         </div>
     </div>
 
