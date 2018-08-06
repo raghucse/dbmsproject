@@ -70,7 +70,9 @@
         <th>Genre</th>
         <th>Runtime</th>
         <th>Average rating</th>
-
+        <th>Recommend</th>
+        <th>Review</th>
+        <th>Shows</th>
     </tr>
     <c:forEach items="${movies}" var="movies" >
         <tr>
@@ -92,11 +94,15 @@
                     <%--<input type="checkbox" name="checkfield" id="g01-01" value="${movies.isRecommended()}"  onchange="doalert(this)"/>--%>
                 </td>
                 <td>
-                    Review
-                        <%--<input type="submit" name="button2" value="Button 2" />--%>
+                    <a href="fetchreview?movieid=<c:out value="${movies.getMoviesId()}"/>">Review</a>
+                                            <%--<input type="submit" name="button2" value="Button 2" />--%>
                         <%--<input type="submit" name="button3" value="Button 3" />--%>
 
                         <%--<input type="checkbox" name="checkfield" id="g01-01" value="${movies.isRecommended()}"  onchange="doalert(this)"/>--%>
+                </td>
+                <td>
+                    <a href="fetchshowtime?movieid=<c:out value="${movies.getMoviesId()}"/>">Show Timings</a>
+
                 </td>
             <%--</form>--%>
 

@@ -1,6 +1,8 @@
 package movies.servlet;
 
+
 import movies.dal.ReviewsDao;
+import movies.model.Recommendations;
 import movies.model.Reviews;
 
 import javax.servlet.annotation.*;
@@ -10,12 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-@WebServlet("/removereview")
-public class RemoveReview extends HttpServlet {
-
+@WebServlet("/fetchreview")
+public class FetchReview extends HttpServlet {
     protected ReviewsDao reviewsDao;
 
     @Override
@@ -29,21 +32,18 @@ public class RemoveReview extends HttpServlet {
         // Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-        // Provide a title and render the JSP.
-        messages.put("title", "Delete Review");
-        int reviewid = Integer.parseInt(req.getParameter("reviewid"));
         Reviews reviews = null;
+        String username = Helper.getUsernameFromCookie(req);
+        int movieid = Integer.parseInt(req.getParameter("movieid"));
         try {
-            reviews = reviewsDao.getReviewById(reviewid);
+            reviews = reviewsDao.getReviewsByUserNameAndMovieId(username,movieid);
+            System.out.println(reviews);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new IOException(e);
         }
-        try {
-            reviewsDao.delete(reviews);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-//        req.getRequestDispatcher("/RemoveReviews.jsp").forward(req, resp);
+        req.setAttribute("reviews", reviews);
+        req.getRequestDispatcher("/FetchReview.jsp").forward(req, resp);
     }
 
     @Override
@@ -52,33 +52,22 @@ public class RemoveReview extends HttpServlet {
         // Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
+        List<Reviews> reviews = new ArrayList<Reviews>();
 
-        // Retrieve and validate name.
-        String reviewid = req.getParameter("reviewid");
-        if (reviewid == null || reviewid.trim().isEmpty()) {
-            messages.put("title", "Invalid reviewid");
-            messages.put("disableSubmit", "true");
+        String username = req.getParameter("username");
+        if (username == null || username.trim().isEmpty()) {
+            messages.put("success", "Please enter a valid name.");
         } else {
-            // Delete the BlogUser.
-            Reviews reviews = new Reviews(Integer.parseInt(reviewid));
+            // Retrieve BlogUsers, and store as a message.
             try {
-                reviews = reviewsDao.delete(reviews);
-                // Update the message.
-                if (reviews == null) {
-                    messages.put("title", "Successfully deleted " + reviewid);
-                    messages.put("disableSubmit", "true");
-                } else {
-                    messages.put("title", "Failed to delete " + reviewid);
-                    messages.put("disableSubmit", "false");
-                }
+                reviews = reviewsDao.getReviewsByUserName(username);
             } catch (SQLException e) {
                 e.printStackTrace();
                 throw new IOException(e);
             }
+            messages.put("success", "Displaying results for " + username);
         }
-
-        req.getRequestDispatcher("/DeleteReviews.jsp").forward(req, resp);
+        req.setAttribute("reviews", reviews);
+        req.getRequestDispatcher("/FetchReview.jsp").forward(req, resp);
     }
-
-
 }

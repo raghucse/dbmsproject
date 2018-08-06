@@ -243,6 +243,53 @@ public class ReviewsDao {
         }
         return reviews;
     }
+
+    public Reviews getReviewsByUserNameAndMovieId(String userName, int movieid) throws SQLException {
+        Reviews reviews = null;
+        String selectReview =
+                "SELECT * " +
+                        "FROM Reviews " +
+                        "WHERE UserName=?" +
+                        "AND MovieId=?;";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectReview);
+            selectStmt.setString(1, userName);
+            selectStmt.setInt(2,movieid);
+            results = selectStmt.executeQuery();
+            UsersDao users = UsersDao.getInstance();
+            MoviesDao moviesDao = MoviesDao.getInstance();
+            if (results.next()) {
+                int resultReviewId = results.getInt("ReviewId");
+                String username = results.getString("UserName");
+                int movieId = results.getInt("MovieId");
+                Date created = new Date(results.getTimestamp("CreatedTime").getTime());
+                String content = results.getString("Content");
+                double rating = results.getDouble("Rating");
+                Users user = users.getUserFromUserName(username);
+                Movies movies = moviesDao.getMovieById(movieId);
+                reviews = new Reviews(movieId, created, content, rating, user, movies);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (results != null) {
+                results.close();
+            }
+        }
+        return reviews;
+    }
+
     public List<Reviews> getAllReviews() throws SQLException {
         List<Reviews> reviews = new ArrayList<Reviews>();
         String selectreviews = "SELECT * FROM Reviews";
