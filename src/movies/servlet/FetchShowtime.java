@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("fetchshowtime")
+@WebServlet("/fetchshowtime")
 public class FetchShowtime extends HttpServlet {
 
     protected ShowInfoDao showInfoDao;
